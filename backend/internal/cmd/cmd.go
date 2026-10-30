@@ -11,6 +11,7 @@ import (
 
 	"backend/internal/controller/hello"
 	"backend/internal/controller/tryon"
+	"backend/internal/controller/x"
 	"backend/internal/imagevalidate"
 	"backend/internal/middleware"
 	"backend/internal/security"
@@ -80,6 +81,7 @@ var (
 				group.Bind(
 					hello.NewV1(),
 					tryon.NewV1(),
+					x.NewV1(),
 				)
 			})
 			s.Run()

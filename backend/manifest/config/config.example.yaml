@@ -190,6 +190,28 @@ llm:
     #   baseURL: "https://api.siliconflow.cn/v1"
     #   model: "Kwai-Kolors/Kolors"
 
+# ============================================================================
+# X（Twitter）分享：将试穿结果图发到用户的 X 账号。
+# X 不是生图模型；Bearer/OAuth Access Token 默认由浏览器设置中心提供，仅随请求进入内存。
+# OAuth 2.0 PKCE 需要在此配置（或环境变量注入）应用 Client ID / Secret / 回调地址。
+# ============================================================================
+x:
+  apiBaseURL: "https://api.x.com"
+  authBaseURL: "https://twitter.com"
+  uploadURL: "https://upload.twitter.com/1.1/media/upload.json"
+  oauth:
+    clientId: ""                    # 或环境变量 X_CLIENT_ID
+    clientIdEnv: "X_CLIENT_ID"
+    clientSecret: ""                # 或环境变量 X_CLIENT_SECRET；勿提交真实值
+    clientSecretEnv: "X_CLIENT_SECRET"
+    redirectUri: "http://127.0.0.1:8000/x/oauth/callback"  # 或环境变量 X_REDIRECT_URI；公网须 HTTPS
+    redirectUriEnv: "X_REDIRECT_URI"
+    scopes: "tweet.read tweet.write users.read offline.access media.write"
+    # OAuth 回调 postMessage 的前端 Origin 白名单（精确匹配）。
+    # 默认还会合并 security.trustedOrigins；本机 localhost/127.0.0.1/::1 始终允许。
+    # 切勿依赖“任意 HTTPS”——未列入白名单的公网 Origin 会被拒绝，防止 Token 外泄。
+    trustedFrontendOrigins: []
+
 # 接口安全与访问控制配置
 security:
   authRequired: true                # 是否强制 Bearer Token 访问鉴权。本地调试可设为 false，线上部署必须为 true
