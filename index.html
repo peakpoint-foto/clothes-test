@@ -1261,6 +1261,56 @@ const VI_ALIAS = {
 };
 
 
+// ===== Search phrase tokenization (resolve multiword aliases before whitespace split) =====
+const SEARCH_PHRASE_SOURCES = [VI_ALIAS, ZH_ALIAS, VI2EN, ZH2EN];
+const SEARCH_PHRASE_VALUE_SOURCES = [EN2VI, EN2ZH];
+const SEARCH_PHRASES = (()=>{
+  const set = new Set();
+  for (const map of SEARCH_PHRASE_SOURCES) {
+    for (const key of Object.keys(map)) {
+      if (/\s/.test(key)) set.add(key.toLowerCase());
+    }
+  }
+  for (const map of SEARCH_PHRASE_VALUE_SOURCES) {
+    for (const val of Object.values(map)) {
+      if (val && /\s/.test(val)) set.add(String(val).toLowerCase());
+    }
+  }
+  return [...set].sort((a, b) => b.length - a.length || a.localeCompare(b));
+})();
+
+function tokenizeSearchQuery(q){
+  let rest = String(q || '').trim().toLowerCase();
+  if (!rest) return [];
+  const tokens = [];
+  while (rest) {
+    rest = rest.replace(/^\s+/, '');
+    if (!rest) break;
+    let matched = '';
+    for (const phrase of SEARCH_PHRASES) {
+      if (!rest.startsWith(phrase)) continue;
+      const next = rest[phrase.length];
+      if (next === undefined || /\s/.test(next)) {
+        matched = phrase;
+        break;
+      }
+    }
+    if (matched) {
+      tokens.push(matched);
+      rest = rest.slice(matched.length);
+      continue;
+    }
+    const m = rest.match(/^\S+/);
+    tokens.push(m[0]);
+    rest = rest.slice(m[0].length);
+  }
+  return tokens;
+}
+
+function resolveSearchAlias(token){
+  return ZH_ALIAS[token] || VI_ALIAS[token] || (ZH2EN[token] ? ZH2EN[token][0] : null) || (VI2EN[token] ? VI2EN[token][0] : null);
+}
+
 // ===== 全局状态 =====
 let LANG = 'vi';
 const THEME_STORAGE_KEY = 'nvzhuang_theme';
@@ -1415,11 +1465,9 @@ function hit(d){
   if(S.cat && d.カテゴリ!==S.cat) return false;
   if(!S.q) return true;
   const idx = buildIndex(d);
-  const words = S.q.split(/\s+/).filter(Boolean);
+  const words = tokenizeSearchQuery(S.q);
   return words.every(w => {
-    // 中文搜索词先反查成英文
-    const aliasEn = ZH_ALIAS[w] || VI_ALIAS[w] || (ZH2EN[w] ? ZH2EN[w][0] : null) || (VI2EN[w] ? VI2EN[w][0] : null);
-    // 直接匹配任意收录词
+    const aliasEn = resolveSearchAlias(w);
     for (const s of idx) {
       if (s.toLowerCase().startsWith(w)) return true;
       if (aliasEn && s.toLowerCase().startsWith(aliasEn)) return true;
@@ -2479,8 +2527,8 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
       const idx=new Set([d.id.toLowerCase()]);
       idx.add(d.カテゴリ);
       d.キーワード.split(' ').forEach(w=>{ idx.add(w); const z=EN2ZH[w]; if(z)idx.add(z); const v=EN2VI[w]; if(v)idx.add(v); });
-      const words=fitSearchQ.toLowerCase().split(/\s+/).filter(Boolean);
-      return words.every(w=>{ const a=ZH_ALIAS[w]||VI_ALIAS[w]||(ZH2EN[w]?ZH2EN[w][0]:null)||(VI2EN[w]?VI2EN[w][0]:null); for(const s of idx){ if(s.toLowerCase().startsWith(w))return true; if(a&&s.toLowerCase().startsWith(a))return true;} return false; });
+      const words=tokenizeSearchQuery(fitSearchQ);
+      return words.every(w=>{ const a=resolveSearchAlias(w); for(const s of idx){ if(s.toLowerCase().startsWith(w))return true; if(a&&s.toLowerCase().startsWith(a))return true;} return false; });
     });
   }
 
