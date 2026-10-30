@@ -1,9 +1,22 @@
 // Package tryon 换装提示词模板，针对不同模型优化
 package tryon
 
+// NormalizePromptLang maps UI language codes to prompt language.
+// Vietnamese UI uses English prompts for model quality (vi → en).
+func NormalizePromptLang(lang string) string {
+	switch lang {
+	case "zh":
+		return "zh"
+	case "en", "vi", "":
+		return "en"
+	default:
+		return "en"
+	}
+}
+
 // BuildGPTSafety 构建 GPT-Image 专用的防封控安全提示词
 func BuildGPTSafety(lang string) string {
-	if lang == "zh" {
+	if NormalizePromptLang(lang) == "zh" {
 		return gptSafetyZhPrompt
 	}
 	return gptSafetyEnPrompt
@@ -17,12 +30,13 @@ func BuildGPT(lang string) string {
 // BuildGemini 构建 Gemini（Nano Banana 2）图像模型的提示词（保留原提示词）
 func BuildGemini(lang string) string {
 	// Gemini 对中英文都支持良好，但换装任务英文指令更稳定
+	_ = lang
 	return enPrompt
 }
 
 // BuildDefault 通用/其他模型（如豆包等）提示词（保留原提示词）
 func BuildDefault(lang string) string {
-	if lang == "zh" {
+	if NormalizePromptLang(lang) == "zh" {
 		return zhPrompt
 	}
 	return enPrompt
