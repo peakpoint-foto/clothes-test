@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="referrer" content="no-referrer">
-<meta name="description" content="拍片哥女装 (COSTUME-DB-01) — bộ ảnh tham chiếu trang phục AI, 1407 bộ ảnh chất lượng cao (2:3), hỗ trợ thử đồ AI một chạm và tìm kiếm song ngữ.">
-<title>拍片哥女装 · Thư viện tham chiếu trang phục AI</title>
+<meta name="description" content="kvPose (COSTUME-DB-01) — bộ ảnh tham chiếu trang phục AI, 1407 bộ ảnh chất lượng cao (2:3), hỗ trợ thử đồ AI một chạm và tìm kiếm.">
+<title>kvPose · Thư viện tham chiếu trang phục AI</title>
 <script>
 try{
   document.documentElement.dataset.theme = localStorage.getItem('nvzhuang_theme') === 'dark' ? 'dark' : 'light';
@@ -44,8 +44,12 @@ button,select,input{font:inherit;color:inherit}
 .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px 16px;flex-wrap:wrap}
 .hero-top .eyebrow{padding-top:18px}
 .hero-controls{display:flex;align-items:center;gap:8px;margin-left:auto;flex-wrap:wrap}
+/* Attribution / credits hidden for Việt hóa fork */
+.foot-source{display:none!important}
+.github-link.credit{display:none!important}
 /* 语言切换 */
 .langswitch{display:flex;border:1px solid var(--control-border);border-radius:12px;padding:4px;background:var(--control-bg)}
+.langswitch[hidden]{display:none!important}
 .langswitch button{min-height:44px;padding:0 16px;border:0;border-radius:9px;background:transparent;color:var(--control-text);font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.15s}
 .langswitch button[aria-pressed=true]{background:var(--selected-bg);color:var(--selected-text)}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:52px;padding:0 15px;border:1px solid var(--control-border);border-radius:12px;background:var(--control-bg);color:var(--control-text);font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.15s}
@@ -394,14 +398,6 @@ footer a:hover{color:var(--tx);text-decoration:underline}
   <div class="hero-top">
     <div class="eyebrow" data-i18n="eyebrow">COSTUME-DB-01 · Bộ sưu tập tham chiếu trang phục</div>
     <div class="hero-controls">
-      <a class="github-link" href="https://x.com/giaaibusi" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="inspirationAria" aria-label="Nguồn cảm hứng / tác giả gốc @giaaibusi">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        <span data-i18n="inspiration">Nguồn cảm hứng</span>
-      </a>
-      <a class="github-link" href="https://github.com/paipiange/nvzhuang" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="sourceCodeAria" aria-label="Mã nguồn">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.11c0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-        <span data-i18n="sourceCode">Mã nguồn</span>
-      </a>
       <button type="button" class="fitting-toggle" id="fittingToggle" aria-haspopup="dialog">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>
         <span data-i18n="fittingTab">Thử đồ AI</span>
@@ -442,7 +438,7 @@ footer a:hover{color:var(--tx);text-decoration:underline}
       </nav>
     </div>
   </div>
-  <h1><span data-i18n="titleWord">拍片哥女装</span> <span data-i18n="titleDb">Thư viện</span></h1>
+  <h1><span data-i18n="titleWord">kvPose</span> <span data-i18n="titleDb">Thư viện</span></h1>
   <p class="sub" data-i18n="subtitle">Ảnh trang phục thuần túy không có người (2:3). Duyệt theo Xuân · Hạ · Thu · Đông · Nội y · Tiệc · Đồ bơi · Sexy.</p>
 </header>
 
@@ -458,14 +454,7 @@ footer a:hover{color:var(--tx);text-decoration:underline}
 <main><div class="grid" id="grid"></div><button type="button" class="btn2 morebtn" id="more" hidden data-i18n="loadingMore">Tải thêm</button></main>
 
 <footer id="foot">
-  <div data-i18n="footerNote">拍片哥女装 COSTUME-DB-01 · Mã nguồn mở MIT · Được phép dùng thương mại và sáng tạo</div>
-  <div class="foot-source">
-    <span data-i18n="footerCredit">Nguồn cảm hứng & tác giả gốc trên X: </span><a href="https://x.com/giaaibusi" target="_blank" rel="noopener noreferrer">@giaaibusi</a>
-    <span class="sep"> · </span>
-    <span data-i18n="footerCommunity">Cộng đồng: </span><a href="https://linux.do/" target="_blank" rel="noopener noreferrer">LINUX DO</a>
-    <span class="sep"> · </span>
-    <a href="https://github.com/paipiange/nvzhuang" target="_blank" rel="noopener noreferrer" data-i18n="githubLink">⭐ Mã nguồn GitHub</a>
-  </div>
+  <div data-i18n="footerNote">kvPose COSTUME-DB-01 · Mã nguồn mở MIT · Được phép dùng thương mại và sáng tạo</div>
 </footer>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" data-i18n-aria-label="modalZoom" aria-label="Xem phóng to">
@@ -1034,7 +1023,7 @@ const I18N = {
   },
   vi: {
     eyebrow: 'COSTUME-DB-01 · Bộ sưu tập tham chiếu trang phục',
-    titleWord: '拍片哥女装',
+    titleWord: 'kvPose',
     titleDb: 'Thư viện',
     subtitle: 'Ảnh trang phục thuần túy không có người (2:3). Duyệt theo Xuân · Hạ · Thu · Đông · Nội y · Tiệc · Đồ bơi · Sexy.',
     tipsTab: 'Hướng dẫn', noticeTab: 'Lưu ý',
@@ -1063,7 +1052,7 @@ const I18N = {
     prevNext: 'trước / sau',
     close: 'Đóng',
     keywordsLabel: 'Từ khóa',
-    footerNote: '拍片哥女装 COSTUME-DB-01 · Mã nguồn mở MIT · Được phép dùng thương mại và sáng tạo',
+    footerNote: 'kvPose COSTUME-DB-01 · Mã nguồn mở MIT · Được phép dùng thương mại và sáng tạo',
     catSpring: 'Xuân', catSummer: 'Hạ', catAutumn: 'Thu', catWinter: 'Đông',
     catLingerie: 'Nội y', catParty: 'Tiệc', catSwimwear: 'Đồ bơi', catSexy: 'Sexy',
     fittingTab: 'Thử đồ AI',
@@ -1154,8 +1143,8 @@ const I18N = {
     historyDelete: 'Xóa', historyDeleteConfirm: 'Xóa bản ghi tạo ảnh này?', historyView: 'Xem', historyDownload: 'Tải xuống',
     historySaved: 'Thử đồ xong và đã lưu vào lịch sử cục bộ', historySaveFailed: 'Thử đồ xong, nhưng trình duyệt không lưu được lịch sử',
     historyLoadFailed: 'Không đọc được lịch sử cục bộ. Hãy kiểm tra quyền lưu trữ trình duyệt.', historyGarment: 'Trang phục',
-    pageTitle: '拍片哥女装 · Thư viện tham chiếu trang phục AI',
-    pageDescription: '拍片哥女装 (COSTUME-DB-01) — bộ ảnh tham chiếu trang phục AI, 1407 bộ ảnh chất lượng cao (2:3), hỗ trợ thử đồ AI một chạm và tìm kiếm song ngữ.',
+    pageTitle: 'kvPose · Thư viện tham chiếu trang phục AI',
+    pageDescription: 'kvPose (COSTUME-DB-01) — bộ ảnh tham chiếu trang phục AI, 1407 bộ ảnh chất lượng cao (2:3), hỗ trợ thử đồ AI một chạm và tìm kiếm.',
     searchLabel: 'Tìm kiếm',
     categoryTabs: 'Phân loại',
     modalZoom: 'Xem phóng to',
@@ -1334,8 +1323,12 @@ function reshuffle(){
 
 // ===== i18n 工具 =====
 function t(key){
-  const dict = I18N[LANG] || I18N.vi || I18N.zh;
-  return dict[key] || (I18N.vi && I18N.vi[key]) || (I18N.zh && I18N.zh[key]) || (I18N.en && I18N.en[key]) || key;
+  const dict = I18N[LANG] || I18N.vi || I18N.en;
+  if (LANG === 'vi') {
+    // Never surface Chinese via zh fallback on Vietnamese UX.
+    return dict[key] || (I18N.en && I18N.en[key]) || key;
+  }
+  return dict[key] || (I18N.vi && I18N.vi[key]) || (I18N.en && I18N.en[key]) || (I18N.zh && I18N.zh[key]) || key;
 }
 function catName(ja){
   return t(CAT_KEY[ja] || ja);
@@ -2783,9 +2776,11 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
       if(tryonSettings.useCustom && /browser-custom/i.test(data.message)){
         return { code: '', text: t('settingsBackendOutdated') };
       }
-      // Prefer localized generic failure; avoid surfacing raw server Chinese on vi UI.
-      if (LANG === 'vi') return { code: '', text: t('aiFailed') };
-      return { code: '', text: t('aiFailed') + '：' + data.message };
+      // Prefer localized generic failure; never surface raw Chinese server text on vi UX.
+      if (LANG === 'vi' || !LANG) return { code: '', text: t('aiFailed') };
+      // If server message itself looks CJK-heavy, keep generic copy even for other langs.
+      if (/[\u4e00-\u9fff]/.test(String(data.message))) return { code: '', text: t('aiFailed') };
+      return { code: '', text: t('aiFailed') + ': ' + data.message };
     }
     const status = resp ? Number(resp.status) || 0 : 0;
     if(status === 502 || status === 503 || status === 504){
@@ -3054,8 +3049,11 @@ const qs = new URLSearchParams(location.search);
 const qsLang = qs.get('lang');
 let storedLang = '';
 try{ storedLang = localStorage.getItem('kvpose_lang') || ''; }catch(_){}
-if (qsLang==='en' || qsLang==='zh' || qsLang==='vi') LANG = qsLang;
-else if (storedLang==='en' || storedLang==='zh' || storedLang==='vi') LANG = storedLang;
+// C1 Vietnamese-only UX: allow vi (default) and optional en for QA; ignore zh so Chinese UI cannot activate.
+if (qsLang==='en' || qsLang==='vi') LANG = qsLang;
+else if (storedLang==='en' || storedLang==='vi') LANG = storedLang;
+else LANG = 'vi';
+if (LANG === 'zh') LANG = 'vi';
 const qsQ = qs.get('q');
 if (qsQ) { S.q = qsQ.trim().toLowerCase(); const qi=$('#q'); qi.value=qsQ.trim(); }
 applyLang();
