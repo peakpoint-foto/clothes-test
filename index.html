@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="vi">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="referrer" content="no-referrer">
-<meta name="description" content="拍片哥女装 (COSTUME-DB-01) — AI 服装参考图集，收录 1407 套高品质服装图片（2:3），支持一键 AI 试穿换装与中英文双向检索。">
-<title>拍片哥女装 · AI 服装参考图集</title>
+<meta name="description" content="拍片哥女装 (COSTUME-DB-01) — bộ ảnh tham chiếu trang phục AI, 1407 bộ ảnh chất lượng cao (2:3), hỗ trợ thử đồ AI một chạm và tìm kiếm song ngữ.">
+<title>拍片哥女装 · Thư viện tham chiếu trang phục AI</title>
 <script>
 try{
   document.documentElement.dataset.theme = localStorage.getItem('nvzhuang_theme') === 'dark' ? 'dark' : 'light';
@@ -392,144 +392,144 @@ footer a:hover{color:var(--tx);text-decoration:underline}
 <body>
 <header class="hero">
   <div class="hero-top">
-    <div class="eyebrow" data-i18n="eyebrow">COSTUME-DB-01 · 图像参照用服装集</div>
+    <div class="eyebrow" data-i18n="eyebrow">COSTUME-DB-01 · Bộ sưu tập tham chiếu trang phục</div>
     <div class="hero-controls">
-      <a class="github-link" href="https://x.com/giaaibusi" target="_blank" rel="noopener noreferrer" aria-label="原作者/灵感来源 @giaaibusi">
+      <a class="github-link" href="https://x.com/giaaibusi" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="inspirationAria" aria-label="Nguồn cảm hứng / tác giả gốc @giaaibusi">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        <span data-i18n="inspiration">灵感来源</span>
+        <span data-i18n="inspiration">Nguồn cảm hứng</span>
       </a>
-      <a class="github-link" href="https://github.com/paipiange/nvzhuang" target="_blank" rel="noopener noreferrer" aria-label="源代码">
+      <a class="github-link" href="https://github.com/paipiange/nvzhuang" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="sourceCodeAria" aria-label="Mã nguồn">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.73.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.04.77 2.1v3.11c0 .3.21.66.8.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-        <span data-i18n="sourceCode">源代码</span>
+        <span data-i18n="sourceCode">Mã nguồn</span>
       </a>
       <button type="button" class="fitting-toggle" id="fittingToggle" aria-haspopup="dialog">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>
-        <span data-i18n="fittingTab">AI 试穿搭配</span>
+        <span data-i18n="fittingTab">Thử đồ AI</span>
       </button>
       <button type="button" class="theme-toggle" id="themeToggle" data-theme-toggle aria-pressed="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
-        <span data-theme-label>黑色主题</span>
+        <span data-theme-label>Giao diện tối</span>
       </button>
-      <div class="langswitch" id="langswitch" role="group" aria-label="语言切换">
-        <button type="button" data-lang="zh" aria-pressed="true">中文</button>
+      <div class="langswitch" id="langswitch" role="group" data-i18n-aria-label="langSwitch" aria-label="Chuyển ngôn ngữ" hidden>
+        <button type="button" data-lang="vi" aria-pressed="true">Tiếng Việt</button>
         <button type="button" data-lang="en" aria-pressed="false">English</button>
       </div>
-      <nav class="infotabs" id="infotabs" aria-label="使用提示・注意事项">
-        <button type="button" class="itab" id="itab0" aria-haspopup="dialog" aria-expanded="false" aria-controls="ipanel0" data-i18n="tipsTab">使用提示</button>
-        <button type="button" class="itab" id="itab1" aria-haspopup="dialog" aria-expanded="false" aria-controls="ipanel1" data-i18n="noticeTab">注意事项</button>
+      <nav class="infotabs" id="infotabs" data-i18n-aria-label="infoTabs" aria-label="Hướng dẫn · Lưu ý">
+        <button type="button" class="itab" id="itab0" aria-haspopup="dialog" aria-expanded="false" aria-controls="ipanel0" data-i18n="tipsTab">Hướng dẫn</button>
+        <button type="button" class="itab" id="itab1" aria-haspopup="dialog" aria-expanded="false" aria-controls="ipanel1" data-i18n="noticeTab">Lưu ý</button>
         <div class="ipanel" id="ipanel0" role="dialog" aria-labelledby="ipt0" tabindex="-1" hidden>
-          <div class="ipanel-hd"><h2 id="ipt0" data-i18n="tipsTitle">使用提示</h2><button type="button" class="ipclose" aria-label="关闭">×</button></div>
+          <div class="ipanel-hd"><h2 id="ipt0" data-i18n="tipsTitle">Hướng dẫn sử dụng</h2><button type="button" class="ipclose" data-i18n-aria-label="close" aria-label="Đóng">×</button></div>
           <ul>
-            <li data-i18n="tips1">作为参照图像，加载到各类 AI 工具的服装参照・图像参照功能中。</li>
-            <li data-i18n="tips2">点击分类按钮可筛选，在搜索框中可按 ID 或服装关键词（例：denim、lace、白）查找。</li>
-            <li data-i18n="tips3">下载原尺寸 PNG 使用，可查看细节。</li>
-            <li data-i18n="tips4">这是没有人物的纯服装图像。脸部、体型、背景请用其他参照图像或指令补充。</li>
+            <li data-i18n="tips1">Dùng làm ảnh tham chiếu trang phục / ảnh tham chiếu trong các công cụ AI.</li>
+            <li data-i18n="tips2">Bấm nút phân loại để lọc, hoặc tìm theo ID / từ khóa trang phục (vd: denim, lace, đen).</li>
+            <li data-i18n="tips3">Tải PNG kích thước gốc để xem chi tiết.</li>
+            <li data-i18n="tips4">Đây là ảnh chỉ có trang phục, không có người. Khuôn mặt, dáng người và nền hãy bổ sung bằng ảnh tham chiếu hoặc prompt khác.</li>
           </ul>
         </div>
         <div class="ipanel" id="ipanel1" role="dialog" aria-labelledby="ipt1" tabindex="-1" hidden>
-          <div class="ipanel-hd"><h2 id="ipt1" data-i18n="noticeTitle">注意事项</h2><button type="button" class="ipclose" aria-label="关闭">×</button></div>
+          <div class="ipanel-hd"><h2 id="ipt1" data-i18n="noticeTitle">Lưu ý</h2><button type="button" class="ipclose" data-i18n-aria-label="close" aria-label="Đóng">×</button></div>
           <ul>
-            <li data-i18n="notice1">基于 MIT 开源协议，完全免费开源，允许商业使用、修改与作品创作。</li>
-            <li data-i18n="notice2">代码与素材全量开放，可自由用于设计参考、AI 试衣或商业项目。</li>
-            <li data-i18n="notice3">无需署名（可自愿）。图像元数据已删除。请无保使用。</li>
-            <li data-i18n="notice4">这是 AI 生成的虚构服装，并非真实商品照片。</li>
-            <li data-i18n="notice5">本页所有服装图像均由文字生成图像（t2i）方式制作，未使用任何真实商品图片。</li>
-            <li data-i18n="notice6">发布前已与现有品牌做相似性检查，但不保证不侵犯第三方权利。</li>
-            <li data-i18n="notice7">使用时请自行负责确认与判断。因使用本数据产生的问题，本站概不负责。</li>
-            <li data-i18n="notice8">请勿用于表现真实人物或未成年人的用途，以及违背公序良俗的用途。</li>
+            <li data-i18n="notice1">Hoàn toàn miễn phí, mã nguồn mở theo giấy phép MIT; cho phép dùng thương mại, chỉnh sửa và sáng tạo.</li>
+            <li data-i18n="notice2">Mã nguồn và tài nguyên mở toàn bộ; dùng tự do cho thiết kế, thử đồ AI hoặc dự án thương mại.</li>
+            <li data-i18n="notice3">Không bắt buộc ghi nguồn (tùy chọn). Metadata ảnh đã được xóa. Sử dụng nguyên trạng, không bảo đảm.</li>
+            <li data-i18n="notice4">Đây là trang phục hư cấu do AI tạo, không phải ảnh sản phẩm thật.</li>
+            <li data-i18n="notice5">Mọi ảnh trang phục trên trang được tạo bằng text-to-image (t2i), không dùng ảnh sản phẩm thật.</li>
+            <li data-i18n="notice6">Đã kiểm tra độ tương đồng với thương hiệu hiện có trước khi đăng, nhưng không bảo đảm không xâm phạm quyền bên thứ ba.</li>
+            <li data-i18n="notice7">Bạn tự chịu trách nhiệm xác nhận và quyết định khi sử dụng. Chúng tôi không chịu trách nhiệm về vấn đề phát sinh từ dữ liệu này.</li>
+            <li data-i18n="notice8">Không dùng để mô tả người thật hoặc trẻ vị thành niên, cũng như mục đích trái thuần phong mỹ tục.</li>
           </ul>
         </div>
       </nav>
     </div>
   </div>
-  <h1><span data-i18n="titleWord">拍片哥女装</span> <span data-i18n="titleDb">图库</span></h1>
-  <p class="sub" data-i18n="subtitle">人物不入镜的纯服装图像（2:3）。可按春・夏・秋・冬・内衣・派对・泳装・性感分类浏览。</p>
+  <h1><span data-i18n="titleWord">拍片哥女装</span> <span data-i18n="titleDb">Thư viện</span></h1>
+  <p class="sub" data-i18n="subtitle">Ảnh trang phục thuần túy không có người (2:3). Duyệt theo Xuân · Hạ · Thu · Đông · Nội y · Tiệc · Đồ bơi · Sexy.</p>
 </header>
 
 <div class="tools"><div class="tools-in">
-  <div class="tabs" id="tabs" role="tablist" aria-label="分类"></div>
+  <div class="tabs" id="tabs" role="tablist" data-i18n-aria-label="categoryTabs" aria-label="Phân loại"></div>
   <div class="row2">
     <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" type="search" data-i18n-placeholder="searchPh" placeholder="按 ID・关键词搜索　例：denim、白" autocomplete="off" aria-label="搜索"></label>
+      <input id="q" type="search" data-i18n-placeholder="searchPh" placeholder="Tìm theo ID · từ khóa  vd: denim, đen" autocomplete="off" data-i18n-aria-label="searchLabel" aria-label="Tìm kiếm"></label>
     <span class="count" id="count"></span>
   </div>
 </div></div>
 
-<main><div class="grid" id="grid"></div><button type="button" class="btn2 morebtn" id="more" hidden>加载更多</button></main>
+<main><div class="grid" id="grid"></div><button type="button" class="btn2 morebtn" id="more" hidden data-i18n="loadingMore">Tải thêm</button></main>
 
 <footer id="foot">
-  <div data-i18n="footerNote">拍片哥女装 COSTUME-DB-01 · 基于 MIT 协议开源 · 完全可商用与作品创作</div>
+  <div data-i18n="footerNote">拍片哥女装 COSTUME-DB-01 · Mã nguồn mở MIT · Được phép dùng thương mại và sáng tạo</div>
   <div class="foot-source">
-    <span data-i18n="footerCredit">灵感来源与原作者 X 推文：</span><a href="https://x.com/giaaibusi" target="_blank" rel="noopener noreferrer">@giaaibusi</a>
+    <span data-i18n="footerCredit">Nguồn cảm hứng & tác giả gốc trên X: </span><a href="https://x.com/giaaibusi" target="_blank" rel="noopener noreferrer">@giaaibusi</a>
     <span class="sep"> · </span>
-    <span data-i18n="footerCommunity">社区友链：</span><a href="https://linux.do/" target="_blank" rel="noopener noreferrer">LINUX DO</a>
+    <span data-i18n="footerCommunity">Cộng đồng: </span><a href="https://linux.do/" target="_blank" rel="noopener noreferrer">LINUX DO</a>
     <span class="sep"> · </span>
-    <a href="https://github.com/paipiange/nvzhuang" target="_blank" rel="noopener noreferrer">⭐ GitHub 源码</a>
+    <a href="https://github.com/paipiange/nvzhuang" target="_blank" rel="noopener noreferrer" data-i18n="githubLink">⭐ Mã nguồn GitHub</a>
   </div>
 </footer>
 
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="放大显示">
-  <button class="close" id="mclose" aria-label="关闭">×</button>
+<div class="modal" id="modal" role="dialog" aria-modal="true" data-i18n-aria-label="modalZoom" aria-label="Xem phóng to">
+  <button class="close" id="mclose" data-i18n-aria-label="close" aria-label="Đóng">×</button>
   <div class="mbox">
-    <div class="mimg"><img id="mimg" alt=""><button class="nav l" id="mprev" aria-label="上一套服装">‹</button><button class="nav r" id="mnext" aria-label="下一套服装">›</button></div>
+    <div class="mimg"><img id="mimg" alt=""><button class="nav l" id="mprev" data-i18n-aria-label="prevGarment" aria-label="Trang phục trước">‹</button><button class="nav r" id="mnext" data-i18n-aria-label="nextGarment" aria-label="Trang phục sau">›</button></div>
     <div class="mside">
       <div><h2 id="mtitle"></h2><div class="id" id="mcat"></div></div>
       <div>
-        <div class="lbl" data-i18n="keywordsLabel">关键词</div>
+        <div class="lbl" data-i18n="keywordsLabel">Từ khóa</div>
         <div class="mdesc" id="mdesc"></div>
       </div>
-      <a class="dl" id="mdl" href="#" download data-i18n="download">下载原尺寸（PNG）</a>
-      <button type="button" class="dl dl-try" id="mtryon" data-i18n="aiTryThis">AI 试穿这套</button>
-      <button type="button" class="dl dl-buy" id="mbuy" data-i18n="taobaoSearchSame">🛍️ 淘宝搜同款</button>
-      <button type="button" class="dl dl-pdd" id="mpdd" data-i18n="pinduoduoSearchSame">🛒 拼多多搜同款</button>
-      <div class="keys"><kbd>←</kbd><kbd>→</kbd> <span data-i18n="prevNext">前后服装</span>　<kbd>Esc</kbd> <span data-i18n="close">关闭</span></div>
+      <a class="dl" id="mdl" href="#" download data-i18n="download">Tải kích thước gốc (PNG)</a>
+      <button type="button" class="dl dl-try" id="mtryon" data-i18n="aiTryThis">Thử đồ AI bộ này</button>
+      <button type="button" class="dl dl-buy" id="mbuy" data-i18n="taobaoSearchSame">🛍️ Tìm trên Taobao</button>
+      <button type="button" class="dl dl-pdd" id="mpdd" data-i18n="pinduoduoSearchSame">🛒 Tìm trên Pinduoduo</button>
+      <div class="keys"><kbd>←</kbd><kbd>→</kbd> <span data-i18n="prevNext">trước / sau</span>　<kbd>Esc</kbd> <span data-i18n="close">Đóng</span></div>
     </div>
   </div>
 </div>
 
 <!-- ===== AI 试穿搭配台 ===== -->
-<div class="fitting" id="fitting" role="dialog" aria-modal="true" aria-label="AI 试穿">
+<div class="fitting" id="fitting" role="dialog" aria-modal="true" data-i18n-aria-label="fittingAria" aria-label="Thử đồ AI">
   <div class="fit-top">
-    <button type="button" class="back" id="fitBack">‹ <span data-i18n="fitBack">返回图库</span></button>
-    <h2 data-i18n="fitTitle">AI 试穿</h2>
+    <button type="button" class="back" id="fitBack">‹ <span data-i18n="fitBack">Về thư viện</span></button>
+    <h2 data-i18n="fitTitle">Thử đồ AI</h2>
     <button type="button" class="fit-settings-open" id="fitHistoryOpen" aria-haspopup="dialog" aria-controls="aiHistory">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-      <span data-i18n="historyTitle">生成记录</span>
+      <span data-i18n="historyTitle">Lịch sử tạo ảnh</span>
       <b class="fit-history-count" id="aiHistoryCount" hidden>0</b>
     </button>
     <button type="button" class="fit-settings-open" id="fitSettingsOpen" aria-haspopup="dialog">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21h-4v-.1A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3v-4h.1A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.1A1.7 1.7 0 0 0 15.4 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.4.2.75.55 1 .95.16.27.25.59.25.91V11h.1v4h-.1c-.32 0-.64.09-.91.25-.4.25-.75.6-.95 1Z"/></svg>
-      <span data-i18n="settingsTitle">设置中心</span>
+      <span data-i18n="settingsTitle">Trung tâm cài đặt</span>
     </button>
     <button type="button" class="fit-settings-open" id="fitThemeToggle" data-theme-toggle aria-pressed="false">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
-      <span data-theme-label>黑色主题</span>
+      <span data-theme-label>Giao diện tối</span>
     </button>
-    <span class="fit-hint" data-i18n="fitHint">上传头像 → 选衣服 → 选模型 → 生成效果</span>
+    <span class="fit-hint" data-i18n="fitHint">Tải ảnh → chọn trang phục → chọn mô hình → tạo kết quả</span>
   </div>
   <div class="fit-body">
     <div class="fit-scroll">
       <!-- 步骤 1：上传头像 -->
       <section class="step" data-step="1">
-        <div class="step-head"><span class="step-num">1</span><h3 data-i18n="fitPhotoTitle">上传你的照片</h3></div>
+        <div class="step-head"><span class="step-num">1</span><h3 data-i18n="fitPhotoTitle">Tải ảnh của bạn</h3></div>
         <div class="step-photo-row">
           <label class="upload-zone" id="fitUpload" for="fitFile">
             <span class="ico">📷</span>
-            <span data-i18n="fitUploadBtn">点击上传照片</span>
-            <small data-i18n="fitUploadHint">支持 JPG / PNG / WebP（最大 8MB，小图自动放大）</small>
+            <span data-i18n="fitUploadBtn">Bấm để tải ảnh</span>
+            <small data-i18n="fitUploadHint">Hỗ trợ JPG / PNG / WebP (tối đa 8MB; ảnh nhỏ sẽ được phóng to tự động)</small>
           </label>
           <input type="file" id="fitFile" accept="image/jpeg,image/png,image/webp" hidden>
           <div class="fit-photo" id="fitPhotoWrap" hidden>
             <img id="fitPhotoPreview" alt="">
-            <button type="button" class="rm" id="fitPhotoRm" aria-label="移除照片">×</button>
+            <button type="button" class="rm" id="fitPhotoRm" data-i18n-aria-label="removePhoto" aria-label="Xóa ảnh">×</button>
           </div>
         </div>
         <div class="step-compress-row">
           <label class="step-compress-toggle" for="fitCompress">
             <input type="checkbox" id="fitCompress" checked>
             <span class="step-compress-copy">
-              <strong data-i18n="fitCompressLabel">上传前压缩（推荐，防 413 / 更快）</strong>
-              <small data-i18n="fitCompressHint">最长边缩至 1280px，有效规避第三方模型中转网关 1MB 限制；未勾选时采用高清模式（最大 2048px）。</small>
+              <strong data-i18n="fitCompressLabel">Nén trước khi tải lên (khuyến nghị, tránh 413 / nhanh hơn)</strong>
+              <small data-i18n="fitCompressHint">Thu cạnh dài nhất về 1280px để vượt giới hạn proxy 1MB; bỏ chọn để dùng chế độ HD (tối đa 2048px).</small>
             </span>
           </label>
         </div>
@@ -537,23 +537,23 @@ footer a:hover{color:var(--tx);text-decoration:underline}
 
       <!-- 步骤 2：选择服装 -->
       <section class="step" data-step="2">
-        <div class="step-head"><span class="step-num">2</span><h3 data-i18n="fitGarmentTitle">选择一件服装</h3></div>
-        <div class="garment-source-tabs" role="tablist" aria-label="服装来源" data-i18n-aria-label="garmentSourceLabel">
-          <button type="button" class="garment-source-tab active" id="garmentCatalogTab" role="tab" aria-selected="true" aria-controls="garmentCatalogPanel" tabindex="0" data-i18n="garmentSourceCatalog">图库服装</button>
-          <button type="button" class="garment-source-tab" id="garmentUploadTab" role="tab" aria-selected="false" aria-controls="garmentUploadPanel" tabindex="-1" data-i18n="garmentSourceUpload">上传服装</button>
+        <div class="step-head"><span class="step-num">2</span><h3 data-i18n="fitGarmentTitle">Chọn một trang phục</h3></div>
+        <div class="garment-source-tabs" role="tablist" aria-label="Nguồn trang phục" data-i18n-aria-label="garmentSourceLabel">
+          <button type="button" class="garment-source-tab active" id="garmentCatalogTab" role="tab" aria-selected="true" aria-controls="garmentCatalogPanel" tabindex="0" data-i18n="garmentSourceCatalog">Từ thư viện</button>
+          <button type="button" class="garment-source-tab" id="garmentUploadTab" role="tab" aria-selected="false" aria-controls="garmentUploadPanel" tabindex="-1" data-i18n="garmentSourceUpload">Tải trang phục</button>
         </div>
         <div class="garment-source-panel" id="garmentCatalogPanel" role="tabpanel" aria-labelledby="garmentCatalogTab">
           <div class="fit-search-row">
-            <input class="fit-search" id="fitSearch" type="search" data-i18n-placeholder="fitSearchPh" placeholder="搜索服装…">
-            <button type="button" class="fit-random" id="fitRandom"><span aria-hidden="true">🎲</span><span data-i18n="fitRandom">随机</span></button>
+            <input class="fit-search" id="fitSearch" type="search" data-i18n-placeholder="fitSearchPh" placeholder="Tìm trang phục…">
+            <button type="button" class="fit-random" id="fitRandom"><span aria-hidden="true">🎲</span><span data-i18n="fitRandom">Ngẫu nhiên</span></button>
           </div>
           <div class="garment-list" id="fitGarmentList"></div>
         </div>
         <div class="garment-source-panel" id="garmentUploadPanel" role="tabpanel" aria-labelledby="garmentUploadTab" hidden>
           <label class="upload-zone garment-upload-zone" id="fitGarmentUpload" for="fitGarmentFile">
             <span class="ico" aria-hidden="true">👗</span>
-            <span data-i18n="fitGarmentUploadBtn">上传 1 张整套，或 2 张上下装</span>
-            <small data-i18n="fitGarmentUploadHint">1 张＝完整全身服装；2 张＝第 1 张上半身、第 2 张下半身</small>
+            <span data-i18n="fitGarmentUploadBtn">Tải 1 ảnh cả bộ, hoặc 2 ảnh trên/dưới</span>
+            <small data-i18n="fitGarmentUploadHint">1 ảnh = trang phục cả người; 2 ảnh = ảnh 1 phần trên, ảnh 2 phần dưới</small>
           </label>
           <input type="file" id="fitGarmentFile" accept="image/jpeg,image/png,image/webp" multiple hidden>
           <div class="custom-garment-preview" id="customGarmentPreview" hidden>
@@ -562,49 +562,49 @@ footer a:hover{color:var(--tx);text-decoration:underline}
               <strong id="customGarmentName"></strong>
               <span id="customGarmentInfo"></span>
               <div class="custom-garment-actions">
-                <button type="button" id="customGarmentAdd" data-i18n="customGarmentAddBottom">添加第 2 张（下半身）</button>
-                <button type="button" id="customGarmentReplace" data-i18n="customGarmentReplace">重新选择</button>
-                <button type="button" class="remove" id="customGarmentRemove" data-i18n="customGarmentRemove">全部移除</button>
+                <button type="button" id="customGarmentAdd" data-i18n="customGarmentAddBottom">Thêm ảnh 2 (phần dưới)</button>
+                <button type="button" id="customGarmentReplace" data-i18n="customGarmentReplace">Chọn lại</button>
+                <button type="button" class="remove" id="customGarmentRemove" data-i18n="customGarmentRemove">Xóa hết</button>
               </div>
             </div>
           </div>
-          <p class="custom-garment-guide" data-i18n="customGarmentGuide">上传 1 张时会作为完整全身服装；上传 2 张时，第 1 张作为上半身服装，第 2 张作为下半身服装。建议使用正面、完整、清晰、简单背景的图片。</p>
+          <p class="custom-garment-guide" data-i18n="customGarmentGuide">Một ảnh được coi là bộ đồ cả người. Với hai ảnh, ảnh đầu là phần trên và ảnh thứ hai là phần dưới. Nên dùng ảnh chính diện, đầy đủ, rõ nét, nền đơn giản.</p>
         </div>
       </section>
 
       <!-- 步骤 3：选模型 + 生成 -->
       <section class="step" data-step="3">
-        <div class="step-head"><span class="step-num">3</span><h3 data-i18n="aiTitle">生成效果</h3></div>
+        <div class="step-head"><span class="step-num">3</span><h3 data-i18n="aiTitle">Tạo kết quả</h3></div>
         <div class="ai-model-row">
-          <span class="lbl" data-i18n="aiModel">换装模型</span>
+          <span class="lbl" data-i18n="aiModel">Mô hình thử đồ</span>
           <select id="aiModel">
-            <option value="gemini" data-i18n="aiModelGemini">Nano Banana 2（默认）</option>
+            <option value="gemini" data-i18n="aiModelGemini">Nano Banana 2 (mặc định)</option>
             <option value="gpt-image" data-i18n="aiModelGPT">GPT Image 2</option>
-            <option value="doubao" data-i18n="aiModelDoubao">豆包 Seedream（国内）</option>
+            <option value="doubao" data-i18n="aiModelDoubao">Doubao Seedream (CN)</option>
           </select>
         </div>
-        <div class="fit-tip-box ai-gpt-notice" id="aiGptNotice" style="display:none;background:rgba(234,179,8,.08);border-color:rgba(234,179,8,.25);color:var(--tx2);" data-i18n="gptModelNotice">💡 提示：GPT Image 2 已启用防封控安全提示词；生成时将以端庄商用型录风格合成服装，人物面部将保持神貌相似。</div>
+        <div class="fit-tip-box ai-gpt-notice" id="aiGptNotice" style="display:none;background:rgba(234,179,8,.08);border-color:rgba(234,179,8,.25);color:var(--tx2);" data-i18n="gptModelNotice">💡 Lưu ý: GPT Image 2 dùng prompt an toàn chống kiểm duyệt; kết quả theo phong cách catalog thương mại lịch sự và giữ nét mặt tương đồng.</div>
         <div class="ai-config-strip">
           <div class="ai-config-copy">
-            <span data-i18n="settingsCurrent">当前调用配置</span>
+            <span data-i18n="settingsCurrent">Cấu hình đang dùng</span>
             <strong id="aiConfigName"></strong>
             <small id="aiConfigNote"></small>
           </div>
-          <button type="button" class="ai-config-btn" id="aiSettingsOpen" data-i18n="settingsManage">管理配置</button>
+          <button type="button" class="ai-config-btn" id="aiSettingsOpen" data-i18n="settingsManage">Quản lý cấu hình</button>
         </div>
-        <div class="fit-tip-box" data-i18n="fitCostTip">💡 提示：图库浏览与选款完全免费；AI 换装需自建后端并配置模型 API Key，可能产生第三方调用费用。</div>
-        <div class="ai-picked" id="aiPicked" data-i18n="aiPickedNone">未选服装</div>
-        <button type="button" class="ai-gen-btn" id="aiGenerate" data-i18n="aiGenerate">开始 AI 换装</button>
+        <div class="fit-tip-box" data-i18n="fitCostTip">Lưu ý: Duyệt thư viện hoàn toàn miễn phí; thử đồ AI cần backend và API key mô hình (có thể phát sinh phí nhà cung cấp).</div>
+        <div class="ai-picked" id="aiPicked" data-i18n="aiPickedNone">Chưa chọn trang phục</div>
+        <button type="button" class="ai-gen-btn" id="aiGenerate" data-i18n="aiGenerate">Bắt đầu thử đồ AI</button>
         <div class="ai-result">
           <div class="ai-result-box" id="aiResultBox">
-            <div class="ai-empty" id="aiResultEmpty" data-i18n="aiResultNone">生成结果会显示在这里</div>
+            <div class="ai-empty" id="aiResultEmpty" data-i18n="aiResultNone">Kết quả sẽ hiện ở đây</div>
             <img id="aiResultImg" alt="" style="display:none">
           </div>
           <div class="ai-result-bar" id="aiResultBar" style="display:none">
-            <button type="button" class="btn-ghost" id="aiRegenerate" data-i18n="aiRegenerate">重新生成</button>
-            <button type="button" class="btn-primary" id="aiDownload" data-i18n="aiDownload">下载结果图</button>
-            <button type="button" class="btn-buy" id="aiTaobaoResult" data-i18n="taobaoSearchSame">🛍️ 淘宝搜同款</button>
-            <button type="button" class="btn-pdd" id="aiPinduoduoResult" data-i18n="pinduoduoSearchSame">🛒 拼多多搜同款</button>
+            <button type="button" class="btn-ghost" id="aiRegenerate" data-i18n="aiRegenerate">Tạo lại</button>
+            <button type="button" class="btn-primary" id="aiDownload" data-i18n="aiDownload">Tải ảnh kết quả</button>
+            <button type="button" class="btn-buy" id="aiTaobaoResult" data-i18n="taobaoSearchSame">🛍️ Tìm trên Taobao</button>
+            <button type="button" class="btn-pdd" id="aiPinduoduoResult" data-i18n="pinduoduoSearchSame">🛒 Tìm trên Pinduoduo</button>
           </div>
         </div>
       </section>
@@ -617,21 +617,21 @@ footer a:hover{color:var(--tx);text-decoration:underline}
   <div class="history-card">
     <div class="history-head">
       <div>
-        <h2 id="aiHistoryTitle" data-i18n="historyTitle">生成记录</h2>
-        <p data-i18n="historySubtitle">生成结果仅保存在当前浏览器，不会上传或跨设备同步。</p>
+        <h2 id="aiHistoryTitle" data-i18n="historyTitle">Lịch sử tạo ảnh</h2>
+        <p data-i18n="historySubtitle">Kết quả chỉ lưu trên trình duyệt này, không tải lên hay đồng bộ thiết bị khác.</p>
       </div>
-      <button type="button" class="history-close" id="aiHistoryClose" aria-label="关闭">×</button>
+      <button type="button" class="history-close" id="aiHistoryClose" data-i18n-aria-label="close" aria-label="Đóng">×</button>
     </div>
     <div class="history-body">
       <div class="history-toolbar">
-        <p class="history-note" data-i18n="historyLocalOnly">使用浏览器本机存储；清除浏览器站点数据后，记录也会被删除。</p>
-        <button type="button" class="history-clear" id="aiHistoryClear" data-i18n="historyClear">清空全部</button>
+        <p class="history-note" data-i18n="historyLocalOnly">Lưu cục bộ bởi trình duyệt. Xóa dữ liệu site sẽ xóa luôn các bản ghi này.</p>
+        <button type="button" class="history-clear" id="aiHistoryClear" data-i18n="historyClear">Xóa tất cả</button>
       </div>
       <div class="history-message" id="aiHistoryMessage" role="status" aria-live="polite"></div>
       <div class="history-grid" id="aiHistoryGrid"></div>
       <div class="history-empty" id="aiHistoryEmpty" hidden>
-        <strong data-i18n="historyEmpty">还没有生成记录</strong>
-        <span data-i18n="historyEmptyHint">完成一次 AI 换装后，结果会自动保存在这里。</span>
+        <strong data-i18n="historyEmpty">Chưa có lịch sử tạo ảnh</strong>
+        <span data-i18n="historyEmptyHint">Sau khi thử đồ AI xong, kết quả sẽ tự lưu ở đây.</span>
       </div>
     </div>
   </div>
@@ -642,26 +642,26 @@ footer a:hover{color:var(--tx);text-decoration:underline}
   <div class="settings-card">
     <div class="settings-head">
       <div>
-        <h2 id="aiSettingsTitle" data-i18n="settingsTitle">设置中心</h2>
-        <p data-i18n="settingsSubtitle">配置试穿后端，或使用你自己的模型 API。</p>
+        <h2 id="aiSettingsTitle" data-i18n="settingsTitle">Trung tâm cài đặt</h2>
+        <p data-i18n="settingsSubtitle">Cấu hình backend thử đồ, hoặc dùng API mô hình của bạn.</p>
       </div>
-      <button type="button" class="settings-close" id="aiSettingsClose" aria-label="关闭">×</button>
+      <button type="button" class="settings-close" id="aiSettingsClose" data-i18n-aria-label="close" aria-label="Đóng">×</button>
     </div>
     <form class="settings-form" id="aiSettingsForm" novalidate>
       <section class="settings-section">
-        <h3 data-i18n="settingsBackendSection">试穿后端</h3>
+        <h3 data-i18n="settingsBackendSection">Backend thử đồ</h3>
         <label class="settings-field">
-          <span data-i18n="settingsBackendUrl">后端 API 地址</span>
+          <span data-i18n="settingsBackendUrl">Địa chỉ API backend</span>
           <input id="settingsBackendUrl" type="url" inputmode="url" autocomplete="url" placeholder="http://127.0.0.1:8000">
-          <small data-i18n="settingsBackendHelp">留空时使用页面预设、?tryon= 参数或本地默认地址。</small>
+          <small data-i18n="settingsBackendHelp">Để trống để dùng preset trang, tham số ?tryon= hoặc địa chỉ mặc định cục bộ.</small>
         </label>
         <label class="settings-field" id="settingsBackendTokenField">
-          <span data-i18n="settingsBackendToken">后端访问 Token</span>
+          <span data-i18n="settingsBackendToken">Token truy cập backend</span>
           <span class="settings-password">
-            <input id="settingsBackendToken" type="password" autocomplete="off" spellcheck="false" placeholder="Bearer Token (32位以上)" data-i18n-placeholder="settingsBackendTokenPlaceholder">
-            <button type="button" id="settingsTokenToggle" data-i18n="settingsShowKey">显示</button>
+            <input id="settingsBackendToken" type="password" autocomplete="off" spellcheck="false" placeholder="Bearer Token (ít nhất 32 ký tự)" data-i18n-placeholder="settingsBackendTokenPlaceholder">
+            <button type="button" id="settingsTokenToggle" data-i18n="settingsShowKey">Hiện</button>
           </span>
-          <small data-i18n="settingsBackendTokenHelp">服务端开启接口访问鉴权时必填（与模型 API Key 区分）。仅用于本站请求鉴权，不上传给第三方。</small>
+          <small data-i18n="settingsBackendTokenHelp">Bắt buộc khi backend bật xác thực truy cập (khác với API Key mô hình). Chỉ dùng để ủy quyền request tới backend của bạn.</small>
         </label>
       </section>
 
@@ -669,50 +669,50 @@ footer a:hover{color:var(--tx);text-decoration:underline}
         <label class="settings-toggle">
           <input id="settingsUseCustom" type="checkbox">
           <span class="settings-toggle-copy">
-            <strong data-i18n="settingsUseCustom">使用我自己的模型配置</strong>
-            <small data-i18n="settingsUseCustomHelp">启用后，本次试穿将使用下方 Base URL、API Key 与模型名。</small>
+            <strong data-i18n="settingsUseCustom">Dùng cấu hình mô hình của tôi</strong>
+            <small data-i18n="settingsUseCustomHelp">Khi bật, lần thử đồ này dùng Base URL, API Key và tên mô hình bên dưới.</small>
           </span>
         </label>
 
         <fieldset class="settings-custom-fields" id="settingsCustomFields">
           <label class="settings-field">
-            <span data-i18n="settingsProvider">接口协议</span>
+            <span data-i18n="settingsProvider">Giao thức API</span>
             <select id="settingsProvider">
-              <option value="gemini">Google Gemini</option>
-              <option value="openai">OpenAI Images 兼容</option>
-              <option value="doubao">豆包 / 火山方舟</option>
-              <option value="comfyui" data-i18n="settingsProviderComfyUI">ComfyUI 本地</option>
+              <option value="gemini" data-i18n="settingsProviderGemini">Google Gemini</option>
+              <option value="openai" data-i18n="settingsProviderOpenAI">Tương thích OpenAI Images</option>
+              <option value="doubao" data-i18n="settingsProviderDoubao">Doubao / Volcengine Ark</option>
+              <option value="comfyui" data-i18n="settingsProviderComfyUI">ComfyUI cục bộ</option>
             </select>
           </label>
           <label class="settings-field" id="settingsBaseField">
             <span>Base URL</span>
             <input id="settingsBaseUrl" type="url" inputmode="url" autocomplete="url" placeholder="https://generativelanguage.googleapis.com/v1beta">
-            <small data-i18n="settingsBaseHelp">仅填写 API 根地址，不要包含模型路径、查询参数或 Key。</small>
+            <small data-i18n="settingsBaseHelp">Chỉ nhập URL gốc API, không gồm đường dẫn mô hình, query hay Key.</small>
           </label>
           <label class="settings-field" id="settingsKeyField">
             <span>API Key</span>
             <span class="settings-password">
               <input id="settingsApiKey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-...">
-              <button type="button" id="settingsKeyToggle" data-i18n="settingsShowKey">显示</button>
+              <button type="button" id="settingsKeyToggle" data-i18n="settingsShowKey">Hiện</button>
             </span>
           </label>
           <label class="settings-field" id="settingsModelField">
-            <span data-i18n="settingsModel">模型名</span>
+            <span data-i18n="settingsModel">Tên mô hình</span>
             <input id="settingsModel" type="text" autocomplete="off" spellcheck="false" placeholder="gemini-3.1-flash-image">
           </label>
           <div class="settings-comfy-test" id="settingsComfyTestRow" hidden>
-            <span data-i18n="settingsComfyHelp">通过本机换装后端检查 ComfyUI、固定工作流和所需节点，不会上传图片或执行生成。</span>
-            <button type="button" id="settingsComfyTest" data-i18n="settingsComfyTest">测试连接</button>
+            <span data-i18n="settingsComfyHelp">Kiểm tra ComfyUI, workflow cố định và các node cần thiết qua backend thử đồ cục bộ. Không tải ảnh và không bắt đầu tạo.</span>
+            <button type="button" id="settingsComfyTest" data-i18n="settingsComfyTest">Kiểm tra kết nối</button>
           </div>
         </fieldset>
       </section>
 
-      <div class="settings-note" id="settingsPrivacy" data-i18n="settingsPrivacy">隐私说明：配置只保存在当前浏览器。启用个人配置时，Key 与 Base URL 会随本次请求发送给你填写的试穿后端；后端只在内存中临时使用，不写数据库、配置文件或日志。共享设备使用后请清除。</div>
+      <div class="settings-note" id="settingsPrivacy" data-i18n="settingsPrivacy">Quyền riêng tư: Cấu hình chỉ lưu trên trình duyệt này. Khi bật cấu hình cá nhân, Key và Base URL được gửi tới backend thử đồ bạn chọn cho đúng request đó. Backend dùng trong bộ nhớ, không ghi DB, file cấu hình hay log. Trên máy dùng chung hãy xóa sau khi dùng.</div>
       <div class="settings-message" id="settingsMessage" role="status" aria-live="polite"></div>
       <div class="settings-actions">
-        <button type="button" class="settings-reset" id="settingsReset" data-i18n="settingsClear">清除本地配置</button>
-        <button type="button" class="settings-cancel" id="settingsCancel" data-i18n="settingsCancel">取消</button>
-        <button type="submit" class="settings-save" data-i18n="settingsSave">保存设置</button>
+        <button type="button" class="settings-reset" id="settingsReset" data-i18n="settingsClear">Xóa cấu hình cục bộ</button>
+        <button type="button" class="settings-cancel" id="settingsCancel" data-i18n="settingsCancel">Hủy</button>
+        <button type="submit" class="settings-save" data-i18n="settingsSave">Lưu cài đặt</button>
       </div>
     </form>
   </div>
@@ -722,11 +722,11 @@ footer a:hover{color:var(--tx);text-decoration:underline}
 <div class="service-dialog-overlay" id="aiServiceDialog" role="dialog" aria-modal="true" aria-labelledby="aiServiceDialogTitle" hidden>
   <div class="service-dialog-card">
     <div class="service-dialog-icon" aria-hidden="true">⚠️</div>
-    <h2 id="aiServiceDialogTitle" data-i18n="tryonErrorTitle">AI 换装遇到问题</h2>
-    <p id="aiServiceDialogMessage">请根据提示修改后重试。</p>
+    <h2 id="aiServiceDialogTitle" data-i18n="tryonErrorTitle">Thử đồ AI gặp sự cố</h2>
+    <p id="aiServiceDialogMessage">Hãy chỉnh theo hướng dẫn rồi thử lại.</p>
     <div class="service-dialog-actions">
-      <button type="button" class="service-dialog-cancel" id="aiServiceDialogCancel" data-i18n="errorDialogClose">知道了</button>
-      <button type="button" class="service-dialog-settings" id="aiServiceDialogSettings" data-i18n="serviceDialogSettings">前往设置</button>
+      <button type="button" class="service-dialog-cancel" id="aiServiceDialogCancel" data-i18n="errorDialogClose">Đã hiểu</button>
+      <button type="button" class="service-dialog-settings" id="aiServiceDialogSettings" data-i18n="serviceDialogSettings">Đến cài đặt</button>
     </div>
   </div>
 </div>
@@ -735,12 +735,12 @@ footer a:hover{color:var(--tx);text-decoration:underline}
 <div class="taobao-dialog-overlay" id="taobaoGuide" role="dialog" aria-modal="true" aria-labelledby="taobaoGuideTitle" hidden>
   <div class="taobao-dialog-card">
     <div class="taobao-dialog-icon" aria-hidden="true">🛍️</div>
-    <h2 id="taobaoGuideTitle" data-i18n="taobaoGuideTitle">服装图片已准备好</h2>
+    <h2 id="taobaoGuideTitle" data-i18n="taobaoGuideTitle">Ảnh trang phục đã sẵn sàng</h2>
     <p id="taobaoGuideMessage"></p>
     <p class="taobao-dialog-status" id="taobaoGuideStatus" role="status" aria-live="polite"></p>
     <div class="taobao-dialog-actions">
-      <button type="button" class="taobao-dialog-close" id="taobaoGuideClose" data-i18n="taobaoGuideClose">知道了</button>
-      <button type="button" class="taobao-dialog-open" id="taobaoGuideOpen" data-i18n="taobaoGuideOpenMobile">打开购物 App</button>
+      <button type="button" class="taobao-dialog-close" id="taobaoGuideClose" data-i18n="taobaoGuideClose">Đã hiểu</button>
+      <button type="button" class="taobao-dialog-open" id="taobaoGuideOpen" data-i18n="taobaoGuideOpenMobile">Mở app Taobao</button>
     </div>
   </div>
 </div>
@@ -872,6 +872,24 @@ const I18N = {
     historyDelete: '删除', historyDeleteConfirm: '确定删除这条生成记录吗？', historyView: '查看', historyDownload: '下载',
     historySaved: '换装完成，已保存到本机生成记录', historySaveFailed: '换装完成，但浏览器无法保存生成记录',
     historyLoadFailed: '无法读取本机生成记录，请检查浏览器存储权限。', historyGarment: '服装',
+    pageTitle: '拍片哥女装 · AI 服装参考图集',
+    pageDescription: '拍片哥女装 (COSTUME-DB-01) — AI 服装参考图集，收录 1407 套高品质服装图片（2:3），支持一键 AI 试穿换装与中英文双向检索。',
+    searchLabel: '搜索',
+    categoryTabs: '分类',
+    modalZoom: '放大显示',
+    prevGarment: '上一套服装',
+    nextGarment: '下一套服装',
+    removePhoto: '移除照片',
+    langSwitch: '语言切换',
+    infoTabs: '使用提示・注意事项',
+    fittingAria: 'AI 试穿',
+    inspirationAria: '原作者/灵感来源 @giaaibusi',
+    sourceCodeAria: '源代码',
+    githubLink: '⭐ GitHub 源码',
+    downloadFilenamePrefix: 'AI换装',
+    settingsProviderOpenAI: 'OpenAI Images 兼容',
+    settingsProviderDoubao: '豆包 / 火山方舟',
+    settingsProviderGemini: 'Google Gemini',
   },
   en: {
     eyebrow: 'COSTUME-DB-01 · PaipianGe Costume Reference Gallery',
@@ -995,7 +1013,163 @@ const I18N = {
     historyDelete: 'Delete', historyDeleteConfirm: 'Delete this generation record?', historyView: 'View', historyDownload: 'Download',
     historySaved: 'Try-on complete and saved to local history', historySaveFailed: 'Try-on complete, but the browser could not save it locally',
     historyLoadFailed: 'Cannot read local generation history. Check browser storage permissions.', historyGarment: 'Garment',
-  }
+    pageTitle: 'PaipianGe · AI Costume Reference Gallery',
+    pageDescription: 'PaipianGe (COSTUME-DB-01) — AI costume reference gallery with 1407 high-quality costume images (2:3), one-click AI try-on, and bilingual search.',
+    searchLabel: 'Search',
+    categoryTabs: 'Categories',
+    modalZoom: 'Zoom view',
+    prevGarment: 'Previous garment',
+    nextGarment: 'Next garment',
+    removePhoto: 'Remove photo',
+    langSwitch: 'Language',
+    infoTabs: 'Tips · Notes',
+    fittingAria: 'AI Try-On',
+    inspirationAria: 'Inspiration / original author @giaaibusi',
+    sourceCodeAria: 'Source code',
+    githubLink: '⭐ GitHub source',
+    downloadFilenamePrefix: 'AI-tryon',
+    settingsProviderOpenAI: 'OpenAI Images compatible',
+    settingsProviderDoubao: 'Doubao / Volcengine Ark',
+    settingsProviderGemini: 'Google Gemini',
+  },
+  vi: {
+    eyebrow: 'COSTUME-DB-01 · Bộ sưu tập tham chiếu trang phục',
+    titleWord: '拍片哥女装',
+    titleDb: 'Thư viện',
+    subtitle: 'Ảnh trang phục thuần túy không có người (2:3). Duyệt theo Xuân · Hạ · Thu · Đông · Nội y · Tiệc · Đồ bơi · Sexy.',
+    tipsTab: 'Hướng dẫn', noticeTab: 'Lưu ý',
+    tipsTitle: 'Hướng dẫn sử dụng', noticeTitle: 'Lưu ý',
+    tips1: 'Dùng làm ảnh tham chiếu trang phục / ảnh tham chiếu trong các công cụ AI.',
+    tips2: 'Bấm nút phân loại để lọc, hoặc tìm theo ID / từ khóa trang phục (vd: denim, lace, đen).',
+    tips3: 'Tải PNG kích thước gốc để xem chi tiết.',
+    tips4: 'Đây là ảnh chỉ có trang phục, không có người. Khuôn mặt, dáng người và nền hãy bổ sung bằng ảnh tham chiếu hoặc prompt khác.',
+    notice1: 'Hoàn toàn miễn phí, mã nguồn mở theo giấy phép MIT; cho phép dùng thương mại, chỉnh sửa và sáng tạo.',
+    notice2: 'Mã nguồn và tài nguyên mở toàn bộ; dùng tự do cho thiết kế, thử đồ AI hoặc dự án thương mại.',
+    notice3: 'Không bắt buộc ghi nguồn (tùy chọn). Metadata ảnh đã được xóa. Sử dụng nguyên trạng, không bảo đảm.',
+    notice4: 'Đây là trang phục hư cấu do AI tạo, không phải ảnh sản phẩm thật.',
+    notice5: 'Mọi ảnh trang phục trên trang được tạo bằng text-to-image (t2i), không dùng ảnh sản phẩm thật.',
+    notice6: 'Đã kiểm tra độ tương đồng với thương hiệu hiện có trước khi đăng, nhưng không bảo đảm không xâm phạm quyền bên thứ ba.',
+    notice7: 'Bạn tự chịu trách nhiệm xác nhận và quyết định khi sử dụng. Chúng tôi không chịu trách nhiệm về vấn đề phát sinh từ dữ liệu này.',
+    notice8: 'Không dùng để mô tả người thật hoặc trẻ vị thành niên, cũng như mục đích trái thuần phong mỹ tục.',
+    searchPh: 'Tìm theo ID · từ khóa  vd: denim, đen',
+    all: 'Tất cả',
+    random: 'Ngẫu nhiên',
+    showing: 'Hiển thị {n} mục',
+    loadingMore: 'Tải thêm',
+    moreLeft: 'Tải thêm (còn {n} mục)',
+    noResultTitle: 'Không có ảnh phù hợp',
+    noResultSub: 'Hãy đổi phân loại hoặc từ khóa tìm kiếm.',
+    download: 'Tải kích thước gốc (PNG)',
+    prevNext: 'trước / sau',
+    close: 'Đóng',
+    keywordsLabel: 'Từ khóa',
+    footerNote: '拍片哥女装 COSTUME-DB-01 · Mã nguồn mở MIT · Được phép dùng thương mại và sáng tạo',
+    catSpring: 'Xuân', catSummer: 'Hạ', catAutumn: 'Thu', catWinter: 'Đông',
+    catLingerie: 'Nội y', catParty: 'Tiệc', catSwimwear: 'Đồ bơi', catSexy: 'Sexy',
+    fittingTab: 'Thử đồ AI',
+    themeToDark: 'Giao diện tối', themeToLight: 'Giao diện sáng',
+    sourceCode: 'Mã nguồn',
+    inspiration: 'Nguồn cảm hứng',
+    footerCredit: 'Nguồn cảm hứng & tác giả gốc trên X: ',
+    footerCommunity: 'Cộng đồng: ',
+    fitBack: 'Về thư viện', fitTitle: 'Thử đồ AI',
+    fitHint: 'Tải ảnh → chọn trang phục → chọn mô hình → tạo kết quả',
+    fitEmptyTitle: 'Hãy tải một ảnh chân dung trước', fitEmptySub: 'Hoặc chọn trang phục bên phải để bắt đầu',
+    fitPhotoTitle: 'Tải ảnh của bạn', fitUploadBtn: 'Bấm để tải ảnh', fitUploadHint: 'Hỗ trợ JPG / PNG / WebP (tối đa 8MB; ảnh nhỏ sẽ được phóng to tự động)',
+    fitCompressLabel: 'Nén trước khi tải lên (khuyến nghị, tránh 413 / nhanh hơn)', fitCompressHint: 'Thu cạnh dài nhất về 1280px để vượt giới hạn proxy 1MB; bỏ chọn để dùng chế độ HD (tối đa 2048px).',
+    fitBgNone: 'Không nền', fitBgWhite: 'Nền trắng',
+    fitGarmentTitle: 'Chọn một trang phục', fitSearchPh: 'Tìm trang phục…', fitRandom: 'Ngẫu nhiên',
+    garmentSourceLabel: 'Nguồn trang phục', garmentSourceCatalog: 'Từ thư viện', garmentSourceUpload: 'Tải trang phục',
+    fitGarmentUploadBtn: 'Tải 1 ảnh cả bộ, hoặc 2 ảnh trên/dưới', fitGarmentUploadHint: '1 ảnh = trang phục cả người; 2 ảnh = ảnh 1 phần trên, ảnh 2 phần dưới',
+    customGarmentLabel: 'Tải tùy chỉnh', customGarmentReplace: 'Chọn lại', customGarmentRemove: 'Xóa hết', customGarmentReady: 'Trang phục tùy chỉnh đã sẵn sàng',
+    customGarmentGuide: 'Một ảnh được coi là bộ đồ cả người. Với hai ảnh, ảnh đầu là phần trên và ảnh thứ hai là phần dưới. Nên dùng ảnh chính diện, đầy đủ, rõ nét, nền đơn giản.', customGarmentPreviewAlt: 'Xem trước trang phục tải lên',
+    customGarmentFull: 'Bộ đồ cả người', customGarmentTop: 'Ảnh 1 · Phần trên', customGarmentBottom: 'Ảnh 2 · Phần dưới',
+    customGarmentAddBottom: 'Thêm ảnh 2 (phần dưới)', customGarmentTooMany: 'Tối đa 2 ảnh trang phục: ảnh 1 phần trên, ảnh 2 phần dưới',
+    customGarmentOneReady: 'Đã tải 1 ảnh, sẽ dùng làm bộ đồ cả người', customGarmentTwoReady: 'Đã tải 2 ảnh: ảnh 1 phần trên, ảnh 2 phần dưới',
+    fitLayerTitle: 'Lớp phối đã thêm', fitClear: 'Xóa', fitExport: 'Xuất ảnh phối',
+    fitNoLayer: 'Chưa thêm trang phục', fitDownloaded: 'Đã xuất ảnh phối',
+    fitPreview: 'Xem trước', fitPreviewClose: 'Quay lại chỉnh', fitPreviewEmpty: 'Chưa có nội dung xem trước — hãy tải ảnh hoặc thêm trang phục',
+    fitOpacity: 'Độ trong suốt ảnh người', fitPerson: 'Tự khớp với người',
+    fitAutoCut: 'Tự xóa nền', fitLayerUp: 'Đưa lên trên', fitLayerDown: 'Đưa xuống dưới',
+    aiTitle: 'Tạo kết quả', aiDesc: 'Dùng mô hình lớn để mặc trang phục lên ảnh người',
+    aiModel: 'Mô hình thử đồ', aiModelGPT: 'GPT Image 2', aiModelDoubao: 'Doubao Seedream (CN)', aiModelGemini: 'Nano Banana 2 (mặc định)',
+    gptModelNotice: '💡 Lưu ý: GPT Image 2 dùng prompt an toàn chống kiểm duyệt; kết quả theo phong cách catalog thương mại lịch sự và giữ nét mặt tương đồng.',
+    aiGeneratingGPT: 'Đang tạo thử đồ bằng GPT Image 2 (chế độ an toàn)…',
+    aiSuccessGPT: 'Thử đồ xong (đã tạo bằng GPT Image 2 chế độ an toàn và lưu)',
+    aiGeneratingComfy: 'Đang tạo bằng workflow ComfyUI cục bộ cố định; khung giữa sẽ là ảnh kết quả…',
+    aiSuccessComfy: 'ComfyUI cục bộ đã tạo xong; kết quả đã lưu vào lịch sử trình duyệt',
+    aiPickedNone: 'Chưa chọn trang phục — hãy chọn một mục bên dưới', aiPicked: 'Đã chọn: ',
+    aiGenerate: 'Bắt đầu thử đồ AI', aiGenerating: 'Đang tạo…', aiNeedPhoto: 'Hãy tải ảnh của bạn trước',
+    aiNeedGarment: 'Hãy chọn một trang phục trong danh sách trước', aiNeedUploadedGarment: 'Hãy tải ảnh trang phục trước', aiNeedBoth: 'Hãy tải ảnh và chọn trang phục trước',
+    aiFailed: 'Thử đồ thất bại, vui lòng thử lại', aiServerErr: 'Không kết nối được dịch vụ thử đồ — hãy kiểm tra backend đã chạy và cấu hình',
+    aiGatewayErr: 'Gateway hoặc dịch vụ upstream tạm thời không khả dụng', aiInvalidResponse: 'Dịch vụ thử đồ trả về phản hồi không nhận diện được', aiHttpErr: 'Dịch vụ thử đồ trả về lỗi',
+    tryonErrorTitle: 'Thử đồ AI gặp sự cố', errorDialogClose: 'Đã hiểu',
+    serviceDialogTitle: 'Không kết nối được dịch vụ thử đồ', serviceDialogMessage: 'Hãy nhập đúng địa chỉ API backend trong Cài đặt, hoặc kiểm tra backend thử đồ đã chạy.',
+    serviceDialogCancel: 'Để sau', serviceDialogSettings: 'Đến cài đặt',
+    aiResult: 'Hoàn tất', aiDownload: 'Tải ảnh kết quả', aiRegenerate: 'Tạo lại',
+    aiResultNone: 'Kết quả sẽ hiện ở đây',
+    aiTryThis: 'Thử đồ AI bộ này', aiTryCard: 'Thử đồ AI',
+    buySame: 'Mua mẫu tương tự', taobaoSearchSame: '🛍️ Tìm trên Taobao', pinduoduoSearchSame: '🛒 Tìm trên Pinduoduo',
+    taobaoGuideTitle: 'Ảnh trang phục đã sẵn sàng',
+    taobaoGuideMobile: 'Đã chuẩn bị ảnh trang phục và thử mở Taobao. Trong app Taobao, dùng gợi ý ảnh mới hoặc nhận diện ảnh để tìm mẫu tương tự.',
+    taobaoGuideDesktop: 'Ảnh trang phục đã được tải. Trên trang tìm kiếm Taobao, bấm biểu tượng máy ảnh cạnh ô tìm kiếm và tải ảnh vừa tải lên.',
+    pinduoduoGuideMobile: 'Đã chuẩn bị ảnh trang phục và thử mở Pinduoduo. Trong app, dùng mục máy ảnh / tìm bằng ảnh và chọn ảnh vừa lưu.',
+    pinduoduoGuideDesktop: 'Ảnh trang phục đã được tải. Tìm bằng ảnh trên web có thể hạn chế; hãy gửi ảnh sang điện thoại và dùng tìm bằng ảnh trong app Pinduoduo.',
+    taobaoGuideCopied: 'Ảnh cũng đã được sao chép vào clipboard.', taobaoGuideDownloaded: 'Đã bắt đầu tải ảnh.', taobaoGuideFailed: 'Lưu ảnh tự động thất bại. Hãy lưu ảnh thủ công rồi tải lên.',
+    taobaoGuideClose: 'Đã hiểu', taobaoGuideOpenMobile: 'Mở app Taobao', taobaoGuideOpenDesktop: 'Mở trang Taobao',
+    pinduoduoGuideOpenMobile: 'Mở Pinduoduo', pinduoduoGuideOpenDesktop: 'Mở trang Pinduoduo',
+    fitCostTip: 'Lưu ý: Duyệt thư viện hoàn toàn miễn phí; thử đồ AI cần backend và API key mô hình (có thể phát sinh phí nhà cung cấp).',
+    settingsTitle: 'Trung tâm cài đặt', settingsSubtitle: 'Cấu hình backend thử đồ, hoặc dùng API mô hình của bạn.',
+    settingsCurrent: 'Cấu hình đang dùng', settingsManage: 'Quản lý cấu hình',
+    settingsBackendSection: 'Backend thử đồ', settingsBackendUrl: 'Địa chỉ API backend',
+    settingsBackendHelp: 'Để trống để dùng preset trang, tham số ?tryon= hoặc địa chỉ mặc định cục bộ.',
+    settingsUseCustom: 'Dùng cấu hình mô hình của tôi', settingsUseCustomHelp: 'Khi bật, lần thử đồ này dùng Base URL, API Key và tên mô hình bên dưới.',
+    settingsProvider: 'Giao thức API', settingsProviderComfyUI: 'ComfyUI cục bộ',
+    settingsProviderOpenAI: 'Tương thích OpenAI Images', settingsProviderDoubao: 'Doubao / Volcengine Ark', settingsProviderGemini: 'Google Gemini',
+    settingsBaseHelp: 'Chỉ nhập URL gốc API, không gồm đường dẫn mô hình, query hay Key.',
+    settingsModel: 'Tên mô hình', settingsShowKey: 'Hiện', settingsHideKey: 'Ẩn',
+    settingsPrivacy: 'Quyền riêng tư: Cấu hình chỉ lưu trên trình duyệt này. Khi bật cấu hình cá nhân, Key và Base URL được gửi tới backend thử đồ bạn chọn cho đúng request đó. Backend dùng trong bộ nhớ, không ghi DB, file cấu hình hay log. Trên máy dùng chung hãy xóa sau khi dùng.',
+    settingsComfyPrivacy: 'Quyền riêng tư: Chế độ ComfyUI chỉ gửi ảnh người và trang phục tới backend thử đồ cục bộ bạn cấu hình. Workflow cố định và đường dẫn mô hình do backend quản lý; không gửi API key và không lưu đường dẫn mô hình cục bộ vào lịch sử trình duyệt.',
+    settingsClear: 'Xóa cấu hình cục bộ', settingsCancel: 'Hủy', settingsSave: 'Lưu cài đặt',
+    settingsSaved: 'Đã lưu cài đặt', settingsCleared: 'Đã xóa cấu hình cục bộ',
+    settingsComfyHelp: 'Kiểm tra ComfyUI, workflow cố định và các node cần thiết qua backend thử đồ cục bộ. Không tải ảnh và không bắt đầu tạo.',
+    settingsComfyTest: 'Kiểm tra kết nối', settingsComfyTesting: 'Đang kiểm tra…', settingsComfyReady: 'Workflow ComfyUI cố định sẵn sàng', settingsComfyUnavailable: 'Không kết nối được ComfyUI. Hãy chắc ComfyUI và backend thử đồ cục bộ đang chạy.',
+    settingsInvalidUrl: 'Nhập URL HTTP/HTTPS hợp lệ (địa chỉ công cộng phải dùng HTTPS)', settingsNeedCustom: 'Hãy điền đủ Base URL, API Key và tên mô hình',
+    settingsBackendOutdated: 'Backend thử đồ quá cũ, không nhận cấu hình mô hình cá nhân. Hãy biên dịch lại và khởi động lại; với Docker chạy docker compose up -d --build.',
+    settingsServerPreset: 'Preset máy chủ', settingsPersonal: 'Mô hình cá nhân',
+    settingsServerNote: 'Backend quản lý Key và tham số mô hình', settingsPersonalNote: 'Key chỉ gửi tạm cho request này; backend không lưu', settingsComfyNote: 'Workflow cố định và đường dẫn mô hình chỉ do backend cục bộ quản lý',
+    settingsBackendToken: 'Token truy cập backend', settingsBackendTokenPlaceholder: 'Bearer Token (ít nhất 32 ký tự)',
+    settingsBackendTokenHelp: 'Bắt buộc khi backend bật xác thực truy cập (khác với API Key mô hình). Chỉ dùng để ủy quyền request tới backend của bạn.',
+    imageCompressing: 'Đang nén và xử lý ảnh…',
+    errAuthRequired: 'Hãy nhập token truy cập backend trong Cài đặt', errAuthInvalid: 'Token truy cập backend không hợp lệ',
+    errOriginNotAllowed: 'Nguồn trang hiện tại không được phép truy cập backend', errRequestTooLarge: 'Nội dung tải lên quá lớn, hãy nén ảnh rồi thử lại',
+    errInvalidImageBase64: 'Dữ liệu ảnh bị hỏng, hãy chọn lại ảnh', errUnsupportedImageType: 'Chỉ hỗ trợ ảnh JPEG, PNG và WebP',
+    errImageFileTooLarge: 'File ảnh quá lớn, hãy nén rồi thử lại', errImageDimensionsInvalid: 'Kích thước ảnh không xử lý được; dùng ảnh hợp lệ, mỗi cạnh không quá 8192 px',
+    errImagePixelLimitExceeded: 'Số pixel ảnh quá cao, hãy thu nhỏ rồi thử lại (tối đa 20 triệu pixel)',
+    errRateLimited: 'Quá nhiều request, vui lòng thử lại sau', errDailyQuotaExceeded: 'Đã hết hạn mức tạo trong ngày', errConcurrencyLimited: 'Đang có nhiều tác vụ tạo, vui lòng thử lại sau',
+    historyTitle: 'Lịch sử tạo ảnh', historySubtitle: 'Kết quả chỉ lưu trên trình duyệt này, không tải lên hay đồng bộ thiết bị khác.',
+    historyLocalOnly: 'Lưu cục bộ bởi trình duyệt. Xóa dữ liệu site sẽ xóa luôn các bản ghi này.',
+    historyEmpty: 'Chưa có lịch sử tạo ảnh', historyEmptyHint: 'Sau khi thử đồ AI xong, kết quả sẽ tự lưu ở đây.',
+    historyClear: 'Xóa tất cả', historyClearConfirm: 'Xóa toàn bộ lịch sử tạo ảnh trên trình duyệt này? Không thể hoàn tác.',
+    historyDelete: 'Xóa', historyDeleteConfirm: 'Xóa bản ghi tạo ảnh này?', historyView: 'Xem', historyDownload: 'Tải xuống',
+    historySaved: 'Thử đồ xong và đã lưu vào lịch sử cục bộ', historySaveFailed: 'Thử đồ xong, nhưng trình duyệt không lưu được lịch sử',
+    historyLoadFailed: 'Không đọc được lịch sử cục bộ. Hãy kiểm tra quyền lưu trữ trình duyệt.', historyGarment: 'Trang phục',
+    pageTitle: '拍片哥女装 · Thư viện tham chiếu trang phục AI',
+    pageDescription: '拍片哥女装 (COSTUME-DB-01) — bộ ảnh tham chiếu trang phục AI, 1407 bộ ảnh chất lượng cao (2:3), hỗ trợ thử đồ AI một chạm và tìm kiếm song ngữ.',
+    searchLabel: 'Tìm kiếm',
+    categoryTabs: 'Phân loại',
+    modalZoom: 'Xem phóng to',
+    prevGarment: 'Trang phục trước',
+    nextGarment: 'Trang phục sau',
+    removePhoto: 'Xóa ảnh',
+    langSwitch: 'Chuyển ngôn ngữ',
+    infoTabs: 'Hướng dẫn · Lưu ý',
+    fittingAria: 'Thử đồ AI',
+    inspirationAria: 'Nguồn cảm hứng / tác giả gốc @giaaibusi',
+    sourceCodeAria: 'Mã nguồn',
+    githubLink: '⭐ Mã nguồn GitHub',
+    downloadFilenamePrefix: 'AI-thu-do',
+  },
 };
 
 // ===== 分类名映射（数据里是日文，需要映射到当前语言）=====
@@ -1045,8 +1219,50 @@ const ZH_ALIAS = {
   '内衣':'lingerie','派对':'party','性感':'sexy','春':'spring','夏':'summer','秋':'autumn','冬':'winter',
 };
 
+
+const EN2VI = {
+  'ivory':'ngà','white':'trắng','black':'đen','red':'đỏ','pink':'hồng','blue':'xanh dương','navy':'xanh navy',
+  'brown':'nâu','beige':'be','grey':'xám','green':'xanh lá','yellow':'vàng','orange':'cam','purple':'tím',
+  'lavender':'lavender','mint':'bạc hà','cream':'kem','gold':'vàng kim','silver':'bạc','khaki':'khaki',
+  'burgundy':'đỏ rượu','olive':'ôliu',
+  'dress':'váy liền','skirt':'váy','jacket':'áo khoác','coat':'áo choàng','sweater':'áo len','cardigan':'cardigan',
+  'blouse':'áo sơ mi nữ','shirt':'áo sơ mi','pants':'quần','jeans':'jeans','shorts':'quần short','boots':'boots',
+  'sneakers':'giày thể thao','sandals':'sandal','heels':'giày cao gót','loafers':'loafers','pumps':'giày bít mũi',
+  'socks':'tất','tights':'quần tất','stockings':'vớ','bag':'túi','tote':'túi tote','hat':'mũ',
+  'beret':'mũ nồi','beanie':'mũ len','scarf':'khăn','muffler':'khăn quàng','gloves':'găng','belt':'thắt lưng',
+  'necklace':'dây chuyền','choker':'choker','camisole':'áo hai dây','bra':'áo ngực','briefs':'quần lót',
+  'swimsuit':'đồ bơi','bikini':'bikini','hoodie':'hoodie','vest':'áo ghi lê','corset':'corset','robe':'áo choàng ngủ',
+  'turtleneck':'cổ lọ','sunglasses':'kính râm','headband':'băng đô','apron':'tạp dề',
+  'denim':'denim','lace':'ren','satin':'satin','leather':'da','knit':'dệt kim','suede':'da lộn',
+  'fur':'lông','velvet':'nhung','wool':'len','chiffon':'voan','tulle':'tulle','mesh':'lưới',
+  'corduroy':'nhung kẻ','floral':'hoa','polka-dot':'chấm bi','ribbon':'nơ','frill':'bèo',
+  'pleated':'xếp ly','mini':'mini','midi':'midi','maxi':'maxi',
+};
+const VI2EN = {};
+for (const [en, vi] of Object.entries(EN2VI)) {
+  if (!VI2EN[vi]) VI2EN[vi] = [];
+  VI2EN[vi].push(en);
+}
+const VI_ALIAS = {
+  'đen':'black','den':'black','trắng':'white','trang':'white','đỏ':'red','do':'red','hồng':'pink','hong':'pink',
+  'xanh':'blue','xanh dương':'blue','navy':'navy','nâu':'brown','nau':'brown','be':'beige','xám':'grey','xam':'grey',
+  'xanh lá':'green','vàng':'yellow','vang':'yellow','cam':'orange','tím':'purple','tim':'purple',
+  'váy':'skirt','vay':'skirt','váy liền':'dress','đầm':'dress','dam':'dress','áo khoác':'coat','ao khoac':'coat',
+  'áo len':'sweater','ao len':'sweater','áo sơ mi':'shirt','ao so mi':'shirt','quần':'pants','quan':'pants',
+  'jeans':'jeans','jean':'jeans','quần short':'shorts','boots':'boots','giày':'sneakers','giay':'sneakers',
+  'sandal':'sandals','cao gót':'heels','cao got':'heels','tất':'socks','tat':'socks','vớ':'stockings','vo':'stockings',
+  'túi':'bag','tui':'bag','mũ':'hat','mu':'hat','khăn':'scarf','khan':'scarf','găng':'gloves','thắt lưng':'belt',
+  'dây chuyền':'necklace','áo ngực':'bra','quần lót':'briefs','đồ bơi':'swimsuit','do boi':'swimsuit','bikini':'bikini',
+  'hoodie':'hoodie','ren':'lace','da':'leather','len':'wool','hoa':'floral','chấm bi':'polka-dot','cham bi':'polka-dot',
+  'nơ':'ribbon','no':'ribbon','xếp ly':'pleated','xep ly':'pleated','mini':'mini',
+  'nội y':'lingerie','noi y':'lingerie','tiệc':'party','tiec':'party','sexy':'sexy',
+  'xuân':'spring','xuan':'spring','hạ':'summer','ha':'summer','thu':'autumn','đông':'winter','dong':'winter',
+  'đồ bơi':'swimsuit','bơi':'swimsuit','boi':'swimsuit',
+};
+
+
 // ===== 全局状态 =====
-let LANG = 'zh';
+let LANG = 'vi';
 const THEME_STORAGE_KEY = 'nvzhuang_theme';
 let THEME = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
 const $=s=>document.querySelector(s);
@@ -1068,8 +1284,8 @@ function reshuffle(){
 
 // ===== i18n 工具 =====
 function t(key){
-  const dict = I18N[LANG] || I18N.zh;
-  return dict[key] || I18N.zh[key] || key;
+  const dict = I18N[LANG] || I18N.vi || I18N.zh;
+  return dict[key] || (I18N.vi && I18N.vi[key]) || (I18N.zh && I18N.zh[key]) || (I18N.en && I18N.en[key]) || key;
 }
 function catName(ja){
   return t(CAT_KEY[ja] || ja);
@@ -1077,9 +1293,27 @@ function catName(ja){
 // 翻译关键词单词（数据里是英文，展示时按语言转换）
 function wordName(w){
   if (LANG==='zh') return EN2ZH[w] || w;
+  if (LANG==='vi') return EN2VI[w] || w;
   return w;
 }
-function fmtNum(n){ return LANG==='zh' ? Number(n).toLocaleString('zh-CN') : Number(n).toLocaleString('en-US'); }
+function localeTag(){
+  if (LANG==='zh') return 'zh-CN';
+  if (LANG==='vi') return 'vi-VN';
+  return 'en-US';
+}
+function fmtNum(n){ return Number(n).toLocaleString(localeTag()); }
+function promptLang(){
+  // UI vi → English prompts for model quality (Gemini/GPT).
+  if (LANG==='vi') return 'en';
+  return LANG;
+}
+function applyDocumentMeta(){
+  const title = t('pageTitle');
+  if (title) document.title = title;
+  const desc = t('pageDescription');
+  const meta = document.querySelector('meta[name="description"]');
+  if (meta && desc) meta.setAttribute('content', desc);
+}
 
 function updateThemeUI(){
   const isDark = THEME === 'dark';
@@ -1104,7 +1338,8 @@ function setTheme(theme){
 
 // ===== 语言切换 =====
 function applyLang(){
-  document.documentElement.lang = LANG==='zh' ? 'zh-CN' : 'en';
+  document.documentElement.lang = LANG==='zh' ? 'zh-CN' : (LANG==='vi' ? 'vi' : 'en');
+  applyDocumentMeta();
   // 静态文本
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     el.textContent = t(el.getAttribute('data-i18n'));
@@ -1119,17 +1354,25 @@ function applyLang(){
   document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>{
     el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria-label')));
   });
-  // 语言按钮状态
+  // 语言按钮状态（C1: switcher ẩn; vẫn cập nhật nếu còn trong DOM / ?lang=）
   document.querySelectorAll('#langswitch button').forEach(b=>{
     b.setAttribute('aria-pressed', String(b.dataset.lang===LANG));
   });
+  const moreBtn = document.getElementById('more');
+  if (moreBtn && typeof VIEW !== 'undefined' && VIEW && VIEW.length > S.n) {
+    moreBtn.textContent = t('moreLeft').replace('{n}', fmtNum(VIEW.length - S.n));
+  }
   updateThemeUI();
   // 重新绘制
   drawTabs();
   draw();
 }
 document.querySelectorAll('#langswitch button').forEach(b=>{
-  b.addEventListener('click', ()=>{ LANG=b.dataset.lang; applyLang(); });
+  b.addEventListener('click', ()=>{
+    LANG=b.dataset.lang;
+    try{ localStorage.setItem('kvpose_lang', LANG); }catch(_){}
+    applyLang();
+  });
 });
 document.querySelectorAll('[data-theme-toggle]').forEach(toggle=>{
   toggle.addEventListener('click', ()=>setTheme(THEME === 'dark' ? 'light' : 'dark'));
@@ -1163,6 +1406,8 @@ function buildIndex(d){
     idx.add(w);
     const zh = EN2ZH[w];
     if (zh) idx.add(zh);          // 中文翻译
+    const vi = EN2VI[w];
+    if (vi) idx.add(vi);          // tiếng Việt
   });
   return idx;
 }
@@ -1173,7 +1418,7 @@ function hit(d){
   const words = S.q.split(/\s+/).filter(Boolean);
   return words.every(w => {
     // 中文搜索词先反查成英文
-    const aliasEn = ZH_ALIAS[w] || (ZH2EN[w] ? ZH2EN[w][0] : null);
+    const aliasEn = ZH_ALIAS[w] || VI_ALIAS[w] || (ZH2EN[w] ? ZH2EN[w][0] : null) || (VI2EN[w] ? VI2EN[w][0] : null);
     // 直接匹配任意收录词
     for (const s of idx) {
       if (s.toLowerCase().startsWith(w)) return true;
@@ -1509,7 +1754,7 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
 
   function formatHistoryDate(value){
     try{
-      return new Intl.DateTimeFormat(LANG==='zh'?'zh-CN':'en-US', {dateStyle:'medium', timeStyle:'short'}).format(new Date(value));
+      return new Intl.DateTimeFormat(localeTag(), {dateStyle:'medium', timeStyle:'short'}).format(new Date(value));
     }catch(_){ return new Date(value).toLocaleString(); }
   }
 
@@ -1751,7 +1996,7 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
         const url = URL.createObjectURL(imageBlob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `AI换装-${record.garmentId || record.createdAt}.${imageExtensionForMime(imageBlob.type)}`;
+        a.download = `${t('downloadFilenamePrefix')}-${record.garmentId || record.createdAt}.${imageExtensionForMime(imageBlob.type)}`;
         a.click();
         setTimeout(()=>URL.revokeObjectURL(url), 1000);
         return;
@@ -2233,9 +2478,9 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
       if(!fitSearchQ) return true;
       const idx=new Set([d.id.toLowerCase()]);
       idx.add(d.カテゴリ);
-      d.キーワード.split(' ').forEach(w=>{ idx.add(w); const z=EN2ZH[w]; if(z)idx.add(z); });
+      d.キーワード.split(' ').forEach(w=>{ idx.add(w); const z=EN2ZH[w]; if(z)idx.add(z); const v=EN2VI[w]; if(v)idx.add(v); });
       const words=fitSearchQ.toLowerCase().split(/\s+/).filter(Boolean);
-      return words.every(w=>{ const a=ZH_ALIAS[w]||(ZH2EN[w]?ZH2EN[w][0]:null); for(const s of idx){ if(s.toLowerCase().startsWith(w))return true; if(a&&s.toLowerCase().startsWith(a))return true;} return false; });
+      return words.every(w=>{ const a=ZH_ALIAS[w]||VI_ALIAS[w]||(ZH2EN[w]?ZH2EN[w][0]:null)||(VI2EN[w]?VI2EN[w][0]:null); for(const s of idx){ if(s.toLowerCase().startsWith(w))return true; if(a&&s.toLowerCase().startsWith(a))return true;} return false; });
     });
   }
 
@@ -2490,6 +2735,8 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
       if(tryonSettings.useCustom && /browser-custom/i.test(data.message)){
         return { code: '', text: t('settingsBackendOutdated') };
       }
+      // Prefer localized generic failure; avoid surfacing raw server Chinese on vi UI.
+      if (LANG === 'vi') return { code: '', text: t('aiFailed') };
       return { code: '', text: t('aiFailed') + '：' + data.message };
     }
     const status = resp ? Number(resp.status) || 0 : 0;
@@ -2651,7 +2898,7 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
         // 个人配置由 client_config 决定。这里使用不可回退的标记，避免旧后端静默调用 Gemini。
         model: isComfy ? 'comfyui' : (tryonSettings.useCustom ? 'browser-custom' : aiModel.value),
         size: '1024x1536',
-        lang: LANG,
+        lang: promptLang(),
       };
       if(tryonSettings.useCustom && !isComfy){
         const base = (location.origin && location.origin !== 'null') ? location.origin : 'http://127.0.0.1';
@@ -2738,7 +2985,7 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
     if(!aiResultInfo) return;
     const a=document.createElement('a');
     a.href=createResultImageDataUrl(aiResultInfo);
-    a.download='AI换装-'+Date.now()+'.'+aiResultInfo.extension;
+    a.download=t('downloadFilenamePrefix')+'-'+Date.now()+'.'+aiResultInfo.extension;
     a.click();
   });
   aiTaobaoResult.addEventListener('click', e=>{
@@ -2754,10 +3001,13 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
 })();
 
 // ===== 初始化 =====
-// 支持 URL 参数指定初始语言（?lang=en）和初始搜索词（?q=白），默认中文
+// URL ?lang=vi|en|zh; mặc định tiếng Việt (C1). localStorage kvpose_lang nhớ lựa chọn nếu có.
 const qs = new URLSearchParams(location.search);
 const qsLang = qs.get('lang');
-if (qsLang==='en' || qsLang==='zh') LANG = qsLang;
+let storedLang = '';
+try{ storedLang = localStorage.getItem('kvpose_lang') || ''; }catch(_){}
+if (qsLang==='en' || qsLang==='zh' || qsLang==='vi') LANG = qsLang;
+else if (storedLang==='en' || storedLang==='zh' || storedLang==='vi') LANG = storedLang;
 const qsQ = qs.get('q');
 if (qsQ) { S.q = qsQ.trim().toLowerCase(); const qi=$('#q'); qi.value=qsQ.trim(); }
 applyLang();

@@ -15,8 +15,8 @@ type TryonReq struct {
 	Size string `json:"size" d:"1024x1536" dc:"输出尺寸"`
 	// 是否保留人物面部（保持同一个人）
 	KeepFace bool `json:"keep_face" d:"true" dc:"是否保持人物面部一致"`
-	// 语言：zh / en
-	Lang string `json:"lang" d:"zh" dc:"提示词语言"`
+	// 语言：zh / en / vi（UI vi 由前端映射为 en 以保持提示词质量）
+	Lang string `json:"lang" d:"en" dc:"提示词语言：zh / en（vi 应映射为 en）"`
 	// 浏览器端自定义模型配置。仅用于当前请求，后端不得持久化或记录其中的 Key/Base URL。
 	ClientConfig *ClientModelConfig `json:"client_config,omitempty" dc:"当前请求临时使用的用户模型配置"`
 }

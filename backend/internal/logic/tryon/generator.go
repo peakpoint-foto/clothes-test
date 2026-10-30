@@ -212,7 +212,7 @@ func newGeneratorFromConfig(cfg *ModelConfig) (ImageGenerator, error) {
 
 func validateClientModelConfig(cfg *ModelConfig) error {
 	if cfg.Provider != "openai" && cfg.Provider != "doubao" && cfg.Provider != "gemini" {
-		return fmt.Errorf("不支持的协议类型")
+		return fmt.Errorf("loại giao thức không được hỗ trợ")
 	}
 	if cfg.APIKey == "" || len(cfg.APIKey) > 4096 {
 		return fmt.Errorf("API Key 不能为空或过长")

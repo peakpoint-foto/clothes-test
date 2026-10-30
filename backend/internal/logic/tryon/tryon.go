@@ -20,16 +20,16 @@ func DoTryon(ctx context.Context, personB64, garmentB64, model, size, lang strin
 func DoTryonWithClientConfig(ctx context.Context, personB64, garmentB64, model, size, lang string, clientConfig *ModelConfig) (resultB64, usedModel, usedPrompt string, err error) {
 	// 参数校验
 	if personB64 == "" {
-		return "", "", "", gerror.New("人像照片不能为空")
+		return "", "", "", gerror.New("ảnh chân dung không được để trống")
 	}
 	if garmentB64 == "" {
-		return "", "", "", gerror.New("服装图不能为空")
+		return "", "", "", gerror.New("ảnh trang phục không được để trống")
 	}
 	if err := decodeB64(personB64); err != nil {
-		return "", "", "", gerror.New("人像照片 base64 格式错误")
+		return "", "", "", gerror.New("định dạng base64 ảnh chân dung không hợp lệ")
 	}
 	if err := decodeB64(garmentB64); err != nil {
-		return "", "", "", gerror.New("服装图 base64 格式错误")
+		return "", "", "", gerror.New("định dạng base64 ảnh trang phục không hợp lệ")
 	}
 
 	// 默认模型：Gemini（Nano Banana 2），因为 GPT Image 系列对真人换装场景
@@ -66,7 +66,7 @@ func DoTryonWithClientConfig(ctx context.Context, personB64, garmentB64, model, 
 	result, err := gen.Generate(ctx, personB64, garmentB64, promptStr, size)
 	if err != nil {
 		// 不记录原始错误：网络错误可能包含用户自定义 Base URL，供应商响应也可能含敏感信息。
-		return "", "", "", gerror.Wrap(err, "换装生成失败，请稍后重试")
+		return "", "", "", gerror.Wrap(err, "thử đồ thất bại, vui lòng thử lại sau")
 	}
 
 	return result, gen.Name(), promptStr, nil
@@ -75,10 +75,10 @@ func DoTryonWithClientConfig(ctx context.Context, personB64, garmentB64, model, 
 // DoTryonWithValidatedImages 使用已完成安全校验的图片结构执行换装
 func DoTryonWithValidatedImages(ctx context.Context, personImg, garmentImg *imagevalidate.ValidatedImage, model, size, lang string, clientConfig *ModelConfig) (resultB64, usedModel, usedPrompt string, err error) {
 	if personImg == nil || len(personImg.Data) == 0 {
-		return "", "", "", gerror.New("人像照片不能为空")
+		return "", "", "", gerror.New("ảnh chân dung không được để trống")
 	}
 	if garmentImg == nil || len(garmentImg.Data) == 0 {
-		return "", "", "", gerror.New("服装图不能为空")
+		return "", "", "", gerror.New("ảnh trang phục không được để trống")
 	}
 
 	personB64 := base64.StdEncoding.EncodeToString(personImg.Data)
@@ -110,7 +110,7 @@ func DoTryonWithValidatedImages(ctx context.Context, personImg, garmentImg *imag
 
 	result, err := gen.Generate(ctx, personB64, garmentB64, promptStr, size)
 	if err != nil {
-		return "", "", "", gerror.Wrap(err, "换装生成失败，请稍后重试")
+		return "", "", "", gerror.Wrap(err, "thử đồ thất bại, vui lòng thử lại sau")
 	}
 
 	return result, gen.Name(), promptStr, nil

@@ -127,7 +127,7 @@ func ValidateImagesPair(personInput, garmentInput string, limits ImageLimits) (*
 	}
 
 	if limits.MaxCombinedDecodedBytes > 0 && int64(len(person.Data)+len(garment.Data)) > limits.MaxCombinedDecodedBytes {
-		return nil, nil, security.NewAPIError(422, 42203, "IMAGE_FILE_TOO_LARGE", "两张图片总大小超过限制")
+		return nil, nil, security.NewAPIError(422, 42203, "IMAGE_FILE_TOO_LARGE", "Tổng kích thước hai ảnh vượt giới hạn")
 	}
 
 	return person, garment, nil

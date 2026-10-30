@@ -34,6 +34,19 @@ func TestBuildPrompt(t *testing.T) {
 		t.Errorf("BuildDefault(en) should return original enPrompt, got: %s", defaultEn)
 	}
 
+	// UI vi → English prompts (quality path)
+	if NormalizePromptLang("vi") != "en" {
+		t.Errorf("NormalizePromptLang(vi) should map to en")
+	}
+	gptVi := BuildGPT("vi")
+	if !strings.Contains(gptVi, "virtual try-on") {
+		t.Errorf("BuildGPT(vi) should use English safety prompt, got: %s", gptVi)
+	}
+	defaultVi := BuildDefault("vi")
+	if !strings.Contains(defaultVi, "You are a professional fashion virtual try-on assistant") {
+		t.Errorf("BuildDefault(vi) should use English prompt, got: %s", defaultVi)
+	}
+
 	// GPT-Image 安全提示词验证
 	if !strings.Contains(gptEn, "modest neckline") || !strings.Contains(gptEn, "Fully clothed") {
 		t.Errorf("gptSafetyEnPrompt missing safety constraints")
@@ -87,13 +100,13 @@ func TestDoTryonValidation(t *testing.T) {
 
 	// Empty person
 	_, _, _, err := DoTryon(ctx, "", "somegarment", "gemini", "1024x1536", "zh")
-	if err == nil || !strings.Contains(err.Error(), "人像照片不能为空") {
+	if err == nil || !strings.Contains(err.Error(), "ảnh chân dung không được để trống") {
 		t.Errorf("expected empty person error, got: %v", err)
 	}
 
 	// Empty garment
 	_, _, _, err = DoTryon(ctx, "someperson", "", "gemini", "1024x1536", "zh")
-	if err == nil || !strings.Contains(err.Error(), "服装图不能为空") {
+	if err == nil || !strings.Contains(err.Error(), "ảnh trang phục không được để trống") {
 		t.Errorf("expected empty garment error, got: %v", err)
 	}
 }
@@ -142,7 +155,7 @@ func TestClientConfigOverridesTopLevelModel(t *testing.T) {
 	_, _, _, err := DoTryonWithClientConfig(
 		context.Background(), validB64, validB64, "gemini", "1024x1536", "zh", clientConfig,
 	)
-	if err == nil || !strings.Contains(err.Error(), "不支持的协议类型") {
+	if err == nil || !strings.Contains(err.Error(), "loại giao thức không được hỗ trợ") {
 		t.Fatalf("expected client config validation to override the top-level gemini model, got: %v", err)
 	}
 }

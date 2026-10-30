@@ -96,12 +96,12 @@ func (c *ControllerV1) ComfyUIHealth(ctx context.Context, req *v1.ComfyUIHealthR
 	if healthErr != nil {
 		return &v1.ComfyUIHealthRes{
 			Available: false,
-			Message:   "本地 ComfyUI 或固定工作流不可用",
+			Message:   "ComfyUI cục bộ hoặc workflow cố định không khả dụng",
 		}, nil
 	}
 	return &v1.ComfyUIHealthRes{
 		Available: true,
 		Model:     model,
-		Message:   "本地 ComfyUI 固定工作流可用",
+		Message:   "Workflow ComfyUI cục bộ cố định sẵn sàng",
 	}, nil
 }
