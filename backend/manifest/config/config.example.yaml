@@ -207,6 +207,10 @@ x:
     redirectUri: "http://127.0.0.1:8000/x/oauth/callback"  # 或环境变量 X_REDIRECT_URI；公网须 HTTPS
     redirectUriEnv: "X_REDIRECT_URI"
     scopes: "tweet.read tweet.write users.read offline.access media.write"
+    # OAuth 回调 postMessage 的前端 Origin 白名单（精确匹配）。
+    # 默认还会合并 security.trustedOrigins；本机 localhost/127.0.0.1/::1 始终允许。
+    # 切勿依赖“任意 HTTPS”——未列入白名单的公网 Origin 会被拒绝，防止 Token 外泄。
+    trustedFrontendOrigins: []
 
 # 接口安全与访问控制配置
 security:

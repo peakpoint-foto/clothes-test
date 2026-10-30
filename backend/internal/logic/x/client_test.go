@@ -25,17 +25,29 @@ func TestValidatePublicHTTPS(t *testing.T) {
 	}
 }
 
-func TestSanitizePostText(t *testing.T) {
+func TestSanitizePostTextWeighted(t *testing.T) {
 	if got := sanitizePostText("  "); got != "AI try-on result" {
 		t.Fatalf("empty default: %q", got)
 	}
-	long := strings.Repeat("测", 300)
-	got := sanitizePostText(long)
-	if strings.Count(got, "测") > defaultMaxTextRunes {
-		t.Fatalf("not truncated: %d", strings.Count(got, "测"))
+	// 140 CJK => 280 weighted units, still allowed
+	okCJK := strings.Repeat("测", 140)
+	if got := sanitizePostText(okCJK); got != okCJK {
+		t.Fatalf("140 CJK should pass unchanged, got len=%d weight=%d", len([]rune(got)), weightedLen(got))
 	}
-	if !strings.HasSuffix(got, "…") {
+	// 141 CJK exceeds 280; must truncate with ellipsis and stay within limit
+	long := strings.Repeat("测", 141)
+	got := sanitizePostText(long)
+	if weightedLen(got) > defaultMaxWeightedUnits {
+		t.Fatalf("weighted length %d exceeds %d", weightedLen(got), defaultMaxWeightedUnits)
+	}
+	if !strings.HasSuffix(got, postTextEllipsis) {
 		t.Fatalf("expected ellipsis suffix: %q", got)
+	}
+	// ASCII near limit
+	ascii := strings.Repeat("a", 300)
+	gotASCII := sanitizePostText(ascii)
+	if weightedLen(gotASCII) > defaultMaxWeightedUnits {
+		t.Fatalf("ascii weighted %d", weightedLen(gotASCII))
 	}
 }
 
@@ -72,9 +84,9 @@ func TestPKCEAndOAuthStore(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	globalOAuthStore.put(state, verifier, "https://example.com")
+	globalOAuthStore.put(state, verifier, "https://paipiange.github.io")
 	got, ok := globalOAuthStore.take(state)
-	if !ok || got.CodeVerifier != verifier || got.FrontendOrigin != "https://example.com" {
+	if !ok || got.CodeVerifier != verifier || got.FrontendOrigin != "https://paipiange.github.io" {
 		t.Fatalf("store take failed: %+v ok=%v", got, ok)
 	}
 	if _, ok := globalOAuthStore.take(state); ok {
@@ -144,14 +156,32 @@ func TestValidateAuthRejectsEmpty(t *testing.T) {
 	}
 }
 
-func TestValidateFrontendOrigin(t *testing.T) {
-	if err := validateFrontendOrigin("https://paipiange.github.io"); err != nil {
+func TestValidateTrustedFrontendOrigin(t *testing.T) {
+	allow := []string{"https://paipiange.github.io", "http://localhost:3000"}
+
+	if err := validateTrustedFrontendOrigin("https://paipiange.github.io", allow); err != nil {
 		t.Fatal(err)
 	}
-	if err := validateFrontendOrigin("http://evil.com"); err == nil {
+	if err := validateTrustedFrontendOrigin("http://127.0.0.1:5500", allow); err != nil {
+		t.Fatal(err)
+	}
+	if err := validateTrustedFrontendOrigin("http://localhost:9999", nil); err != nil {
+		t.Fatal(err)
+	}
+	// Attacker HTTPS must NOT be trusted merely for being HTTPS
+	if err := validateTrustedFrontendOrigin("https://attacker.example", allow); err == nil {
+		t.Fatal("attacker https must be rejected")
+	}
+	if err := validateTrustedFrontendOrigin("https://evil.com", nil); err == nil {
+		t.Fatal("unlisted https must be rejected even with empty allowlist")
+	}
+	if err := validateTrustedFrontendOrigin("http://evil.com", allow); err == nil {
 		t.Fatal("remote http should fail")
 	}
-	if err := validateFrontendOrigin("http://127.0.0.1:5500"); err != nil {
-		t.Fatal(err)
+	if err := validateTrustedFrontendOrigin("", allow); err == nil {
+		t.Fatal("empty origin should fail")
+	}
+	if err := validateTrustedFrontendOrigin("https://paipiange.github.io/path", allow); err == nil {
+		t.Fatal("origin with path should fail")
 	}
 }

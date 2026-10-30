@@ -111,9 +111,19 @@ func (c *ControllerV1) OAuthCallback(ctx context.Context, req *v1.OAuthCallbackR
 
 func writeOAuthResultPage(r *ghttp.Request, ok bool, payload map[string]any, errMsg, frontendOrigin string) {
 	origin := strings.TrimSpace(frontendOrigin)
-	if origin == "" {
-		origin = "*"
+	// Never postMessage tokens to "*" or an empty target — that would allow opener spoofing.
+	deliverSecrets := ok && origin != "" && origin != "*" && payload != nil
+	if ok && !deliverSecrets {
+		ok = false
+		payload = nil
+		if errMsg == "" {
+			errMsg = "未授权的前端来源，已拒绝回传 Token"
+		}
 	}
+	if !ok {
+		payload = nil
+	}
+
 	type msg struct {
 		Type    string         `json:"type"`
 		OK      bool           `json:"ok"`
@@ -122,15 +132,44 @@ func writeOAuthResultPage(r *ghttp.Request, ok bool, payload map[string]any, err
 	}
 	raw, _ := json.Marshal(msg{
 		Type:    "kvpose-x-oauth",
-		OK:      ok,
+		OK:      ok && deliverSecrets,
 		Error:   errMsg,
 		Payload: payload,
 	})
-	originJSON, _ := json.Marshal(origin)
 
 	statusText := "X 授权成功，可以关闭此窗口。"
-	if !ok {
+	if !ok || !deliverSecrets {
+		if errMsg == "" {
+			errMsg = "授权失败"
+		}
 		statusText = "X 授权失败：" + errMsg
+	}
+
+	postMessageJS := "/* no postMessage */"
+	if deliverSecrets {
+		originJSON, _ := json.Marshal(origin)
+		postMessageJS = fmt.Sprintf(`
+  var payload = %s;
+  var target = %s;
+  try {
+    if (window.opener && !window.opener.closed) {
+      window.opener.postMessage(payload, target);
+    }
+  } catch (e) {}
+`, string(raw), string(originJSON))
+	} else if origin != "" && origin != "*" {
+		// Safe to notify failure to the known opener origin without secrets.
+		failRaw, _ := json.Marshal(msg{Type: "kvpose-x-oauth", OK: false, Error: errMsg})
+		originJSON, _ := json.Marshal(origin)
+		postMessageJS = fmt.Sprintf(`
+  var payload = %s;
+  var target = %s;
+  try {
+    if (window.opener && !window.opener.closed) {
+      window.opener.postMessage(payload, target);
+    }
+  } catch (e) {}
+`, string(failRaw), string(originJSON))
 	}
 
 	page := fmt.Sprintf(`<!DOCTYPE html>
@@ -143,17 +182,11 @@ func writeOAuthResultPage(r *ghttp.Request, ok bool, payload map[string]any, err
 <p>%s</p>
 <script>
 (function(){
-  var payload = %s;
-  var target = %s;
-  try {
-    if (window.opener && !window.opener.closed) {
-      window.opener.postMessage(payload, target);
-    }
-  } catch (e) {}
+%s
   setTimeout(function(){ try { window.close(); } catch (e) {} }, 500);
 })();
 </script>
-</body></html>`, html.EscapeString(statusText), string(raw), string(originJSON))
+</body></html>`, html.EscapeString(statusText), postMessageJS)
 
 	r.Response.ClearBuffer()
 	r.Response.Header().Set("Content-Type", "text/html; charset=utf-8")

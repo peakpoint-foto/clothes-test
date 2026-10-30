@@ -12,14 +12,19 @@ import (
 	"net/url"
 	"strings"
 	"time"
-	"unicode/utf8"
+	"unicode"
+
+	"github.com/gogf/gf/v2/frame/g"
 
 	"backend/internal/imagevalidate"
+	"backend/internal/security"
 )
 
 const (
-	defaultMaxTextRunes = 260
-	httpTimeout         = 45 * time.Second
+	// X 标准帖文加权上限（CJK 等计 2，见 https://docs.x.com/fundamentals/counting-characters）
+	defaultMaxWeightedUnits = 280
+	postTextEllipsis        = "…"
+	httpTimeout             = 45 * time.Second
 )
 
 // AuthCredentials 单次请求使用的用户凭据（不持久化）
@@ -184,16 +189,55 @@ func sniffImageMIME(data []byte) string {
 	return ""
 }
 
+func runeWeight(r rune) int {
+	// X weighted counting: CJK / Hangul / fullwidth-related ranges count as 2.
+	if unicode.In(r, unicode.Han, unicode.Hangul, unicode.Hiragana, unicode.Katakana) {
+		return 2
+	}
+	switch {
+	case r >= 0x3000 && r <= 0x303F: // CJK Symbols and Punctuation
+		return 2
+	case r >= 0xFF00 && r <= 0xFFEF: // Halfwidth and Fullwidth Forms
+		return 2
+	case r >= 0x1100 && r <= 0x11FF: // Hangul Jamo
+		return 2
+	default:
+		return 1
+	}
+}
+
+func weightedLen(text string) int {
+	total := 0
+	for _, r := range text {
+		total += runeWeight(r)
+	}
+	return total
+}
+
 func sanitizePostText(text string) string {
 	trimmed := strings.TrimSpace(text)
 	if trimmed == "" {
 		trimmed = "AI try-on result"
 	}
-	if utf8.RuneCountInString(trimmed) <= defaultMaxTextRunes {
+	if weightedLen(trimmed) <= defaultMaxWeightedUnits {
 		return trimmed
 	}
-	runes := []rune(trimmed)
-	return string(runes[:defaultMaxTextRunes-1]) + "…"
+	ellipsisWeight := weightedLen(postTextEllipsis)
+	limit := defaultMaxWeightedUnits - ellipsisWeight
+	if limit < 1 {
+		limit = defaultMaxWeightedUnits
+	}
+	var b strings.Builder
+	weight := 0
+	for _, r := range trimmed {
+		rw := runeWeight(r)
+		if weight+rw > limit {
+			break
+		}
+		b.WriteRune(r)
+		weight += rw
+	}
+	return b.String() + postTextEllipsis
 }
 
 func (c *Client) uploadMedia(ctx context.Context, token string, img []byte, mime string) (string, error) {
@@ -295,6 +339,7 @@ func (c *Client) createTweet(ctx context.Context, token, text, mediaID string) (
 }
 
 // BuildAuthorizeURL 生成 PKCE 授权 URL，并把 verifier 暂存到内存。
+// frontend_origin 必填，且必须落在服务端白名单（或本机回环），禁止任意 HTTPS。
 func BuildAuthorizeURL(ctx context.Context, frontendOrigin string) (authorizeURL, state string, err error) {
 	cfg, err := loadAppConfig(ctx)
 	if err != nil {
@@ -303,10 +348,16 @@ func BuildAuthorizeURL(ctx context.Context, frontendOrigin string) (authorizeURL
 	if err := cfg.requireOAuth(); err != nil {
 		return "", "", err
 	}
-	if frontendOrigin != "" {
-		if err := validateFrontendOrigin(frontendOrigin); err != nil {
-			return "", "", err
-		}
+	frontendOrigin = strings.TrimSpace(frontendOrigin)
+	if frontendOrigin == "" {
+		return "", "", fmt.Errorf("frontend_origin 必填")
+	}
+	allowlist, err := loadTrustedFrontendOrigins(ctx)
+	if err != nil {
+		return "", "", err
+	}
+	if err := validateTrustedFrontendOrigin(frontendOrigin, allowlist); err != nil {
+		return "", "", err
 	}
 	verifier, challenge, err := newPKCEPair()
 	if err != nil {
@@ -351,6 +402,13 @@ func ExchangeCode(ctx context.Context, code, state string) (tokens *tokenRespons
 	if !ok {
 		return nil, "", fmt.Errorf("无效或过期的 OAuth state")
 	}
+	allowlist, err := loadTrustedFrontendOrigins(ctx)
+	if err != nil {
+		return nil, "", err
+	}
+	if err := validateTrustedFrontendOrigin(pending.FrontendOrigin, allowlist); err != nil {
+		return nil, pending.FrontendOrigin, fmt.Errorf("OAuth 回调前端来源未授权")
+	}
 	form := url.Values{}
 	form.Set("grant_type", "authorization_code")
 	form.Set("code", code)
@@ -386,20 +444,73 @@ func ExchangeCode(ctx context.Context, code, state string) (tokens *tokenRespons
 	return &parsed, pending.FrontendOrigin, nil
 }
 
-func validateFrontendOrigin(origin string) error {
-	u, err := url.Parse(strings.TrimSpace(origin))
-	if err != nil || u.Scheme == "" || u.Host == "" {
-		return fmt.Errorf("frontend_origin 无效")
+func loadTrustedFrontendOrigins(ctx context.Context) ([]string, error) {
+	seen := make(map[string]struct{})
+	var out []string
+	add := func(raw string) {
+		norm := normalizeOrigin(raw)
+		if norm == "" || norm == "*" {
+			return
+		}
+		if _, ok := seen[norm]; ok {
+			return
+		}
+		seen[norm] = struct{}{}
+		out = append(out, norm)
 	}
-	if u.Path != "" && u.Path != "/" {
-		return fmt.Errorf("frontend_origin 不能包含路径")
+
+	if v, err := g.Cfg().Get(ctx, "x.oauth.trustedFrontendOrigins"); err == nil && !v.IsEmpty() {
+		for _, item := range v.Strings() {
+			add(item)
+		}
+	}
+	sec, err := security.LoadSecurityConfig(ctx)
+	if err != nil {
+		return nil, err
+	}
+	for _, item := range sec.TrustedOrigins {
+		add(item)
+	}
+	return out, nil
+}
+
+func normalizeOrigin(raw string) string {
+	trimmed := strings.TrimSpace(raw)
+	if trimmed == "" {
+		return ""
+	}
+	u, err := url.Parse(trimmed)
+	if err != nil || u.Scheme == "" || u.Host == "" {
+		return ""
 	}
 	if u.User != nil || u.RawQuery != "" || u.Fragment != "" {
+		return ""
+	}
+	if u.Path != "" && u.Path != "/" {
+		return ""
+	}
+	u.Path = ""
+	u.RawPath = ""
+	return strings.TrimRight(u.String(), "/")
+}
+
+func isLoopbackHostname(host string) bool {
+	h := strings.ToLower(strings.TrimSpace(host))
+	return h == "localhost" || h == "127.0.0.1" || h == "::1"
+}
+
+// validateTrustedFrontendOrigin 仅允许本机回环，或精确匹配服务端白名单。
+// 任意 HTTPS 公网域名一律拒绝（防 frontend_origin 投毒外泄 Token）。
+func validateTrustedFrontendOrigin(origin string, allowlist []string) error {
+	norm := normalizeOrigin(origin)
+	if norm == "" {
 		return fmt.Errorf("frontend_origin 无效")
 	}
-	host := strings.ToLower(u.Hostname())
-	loopback := host == "localhost" || host == "127.0.0.1" || host == "::1"
-	if loopback {
+	u, err := url.Parse(norm)
+	if err != nil {
+		return fmt.Errorf("frontend_origin 无效")
+	}
+	if isLoopbackHostname(u.Hostname()) {
 		if u.Scheme != "http" && u.Scheme != "https" {
 			return fmt.Errorf("frontend_origin 协议无效")
 		}
@@ -408,7 +519,12 @@ func validateFrontendOrigin(origin string) error {
 	if u.Scheme != "https" {
 		return fmt.Errorf("非本机 frontend_origin 必须使用 HTTPS")
 	}
-	return nil
+	for _, allowed := range allowlist {
+		if norm == allowed {
+			return nil
+		}
+	}
+	return fmt.Errorf("frontend_origin 不在服务端白名单中")
 }
 
 // NewClientFromContext 读取配置并构造客户端。

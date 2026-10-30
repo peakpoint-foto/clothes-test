@@ -744,7 +744,8 @@ footer a:hover{color:var(--tx);text-decoration:underline}
           </label>
           <label class="settings-field">
             <span data-i18n="settingsXDefaultText">默认帖文</span>
-            <input id="settingsXDefaultText" type="text" maxlength="260" autocomplete="off" spellcheck="true" placeholder="AI try-on result">
+            <input id="settingsXDefaultText" type="text" autocomplete="off" spellcheck="true" placeholder="AI try-on result" maxlength="560">
+            <small data-i18n="settingsXTextHelp">按 X 加权字数限制（汉字等计 2），最多约 280 加权单位。</small>
           </label>
           <div class="settings-x-actions">
             <button type="button" id="settingsXOAuthConnect" data-i18n="settingsXOAuthConnect">用 OAuth 连接 X</button>
@@ -881,10 +882,12 @@ const I18N = {
     settingsXEnabled: '启用 X 分享', settingsXEnabledHelp: '启用后，生成结果栏会出现「分享到 X」按钮。',
     settingsXAuthMode: '鉴权方式', settingsXAuthBearer: 'API Key / Bearer Token', settingsXAuthOAuth: 'OAuth 连接账号',
     settingsXAccessToken: 'Access Token', settingsXTokenHelp: '用户级 OAuth 2.0 Access Token，或具备发帖权限的 Bearer。应用级只读 Bearer 无法发帖。',
-    settingsXDefaultText: '默认帖文', settingsXOAuthConnect: '用 OAuth 连接 X', settingsXVerify: '校验 Token',
-    settingsXOAuthNeedBackend: 'OAuth 需要已配置 X_CLIENT_ID / 回调地址的试穿后端', settingsXOAuthOpened: '已打开 X 授权窗口，完成后将自动回填 Token',
+    settingsXDefaultText: '默认帖文', settingsXTextHelp: '按 X 加权字数限制（汉字等计 2），最多约 280 加权单位。',
+    settingsXOAuthConnect: '用 OAuth 连接 X', settingsXVerify: '校验 Token',
+    settingsXOAuthNeedBackend: 'OAuth 需要已配置 X_CLIENT_ID / 回调地址的试穿后端，且当前页面 Origin 须在服务端白名单中', settingsXOAuthOpened: '已打开 X 授权窗口，完成后将自动回填 Token',
+    settingsXOAuthPopupBlocked: '浏览器拦截了弹窗，请允许本站弹窗后重试',
     settingsXOAuthOk: 'X 账号已连接', settingsXOAuthFail: 'X OAuth 失败', settingsXVerifyOk: 'Token 有效', settingsXVerifyFail: 'Token 校验失败',
-    settingsXNeedToken: '请填写 Access Token，或先完成 OAuth 连接',
+    settingsXNeedToken: '请填写 Access Token，或先完成 OAuth 连接', settingsXTextTooLong: '帖文超过 X 加权字数上限，已自动截断',
     aiResultNone: '生成结果会显示在这里',
     aiTryThis: 'AI 试穿这套', aiTryCard: 'AI 试穿',
     buySame: '购买同款', taobaoSearchSame: '🛍️ 淘宝搜同款', pinduoduoSearchSame: '🛒 拼多多搜同款',
@@ -1015,10 +1018,12 @@ const I18N = {
     settingsXEnabled: 'Enable X sharing', settingsXEnabledHelp: 'When enabled, a Share on X button appears on the result bar.',
     settingsXAuthMode: 'Auth mode', settingsXAuthBearer: 'API Key / Bearer Token', settingsXAuthOAuth: 'OAuth connect',
     settingsXAccessToken: 'Access Token', settingsXTokenHelp: 'A user OAuth 2.0 access token (or a bearer that can post). App-only read bearer tokens cannot create posts.',
-    settingsXDefaultText: 'Default post text', settingsXOAuthConnect: 'Connect with X OAuth', settingsXVerify: 'Verify token',
-    settingsXOAuthNeedBackend: 'OAuth needs a try-on backend configured with X_CLIENT_ID and callback URL', settingsXOAuthOpened: 'X authorization window opened — token will fill in when complete',
+    settingsXDefaultText: 'Default post text', settingsXTextHelp: 'Uses X weighted length (CJK counts as 2), up to about 280 weighted units.',
+    settingsXOAuthConnect: 'Connect with X OAuth', settingsXVerify: 'Verify token',
+    settingsXOAuthNeedBackend: 'OAuth needs a try-on backend with X_CLIENT_ID / callback, and this page Origin must be on the server allowlist', settingsXOAuthOpened: 'X authorization window opened — token will fill in when complete',
+    settingsXOAuthPopupBlocked: 'Popup blocked — allow popups for this site and retry',
     settingsXOAuthOk: 'X account connected', settingsXOAuthFail: 'X OAuth failed', settingsXVerifyOk: 'Token is valid', settingsXVerifyFail: 'Token verification failed',
-    settingsXNeedToken: 'Enter an Access Token, or connect with OAuth first',
+    settingsXNeedToken: 'Enter an Access Token, or connect with OAuth first', settingsXTextTooLong: 'Post text exceeded X weighted limit and was truncated',
     aiResultNone: 'The result will appear here',
     aiTryThis: 'AI try-on this look', aiTryCard: 'AI try-on',
     buySame: 'Buy This Look', taobaoSearchSame: '🛍️ Search on Taobao', pinduoduoSearchSame: '🛒 Search on Pinduoduo',
@@ -1939,23 +1944,74 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
     settingsXAccessToken.type = showing ? 'password' : 'text';
     settingsXTokenToggle.textContent = t(showing ? 'settingsShowKey' : 'settingsHideKey');
   });
+  const X_MAX_WEIGHTED = 280;
+  function xRuneWeight(ch){
+    const code = ch.codePointAt(0);
+    // Mirror backend weighted rules: Han/Hangul/Kana and related ranges count as 2.
+    if(/\p{Script=Han}|\p{Script=Hangul}|\p{Script=Hiragana}|\p{Script=Katakana}/u.test(ch)) return 2;
+    if((code >= 0x3000 && code <= 0x303F) || (code >= 0xFF00 && code <= 0xFFEF) || (code >= 0x1100 && code <= 0x11FF)) return 2;
+    return 1;
+  }
+  function xWeightedLen(text){
+    let total = 0;
+    for(const ch of String(text || '')) total += xRuneWeight(ch);
+    return total;
+  }
+  function truncateXWeighted(text, maxUnits){
+    const limit = Math.max(1, maxUnits || X_MAX_WEIGHTED);
+    const src = String(text || '');
+    if(xWeightedLen(src) <= limit) return src;
+    const ellipsis = '…';
+    const ellipsisWeight = xWeightedLen(ellipsis);
+    let budget = limit - ellipsisWeight;
+    if(budget < 1) budget = limit;
+    let out = '';
+    let weight = 0;
+    for(const ch of src){
+      const w = xRuneWeight(ch);
+      if(weight + w > budget) break;
+      out += ch;
+      weight += w;
+    }
+    return out + ellipsis;
+  }
+
+  settingsXDefaultText.addEventListener('input', ()=>{
+    const next = truncateXWeighted(settingsXDefaultText.value, X_MAX_WEIGHTED);
+    if(next !== settingsXDefaultText.value){
+      settingsXDefaultText.value = next;
+      setXStatus(t('settingsXTextTooLong'));
+    }
+  });
+
   settingsXOAuthConnect.addEventListener('click', async ()=>{
     const backendUrl = getTryonBackendBase();
     if(!validHttpUrl(backendUrl, true)){ setSettingsMessage(t('settingsInvalidUrl')); return; }
+    const origin = (location.origin && location.origin !== 'null') ? location.origin : '';
+    if(!origin){ setXStatus(t('settingsXOAuthNeedBackend')); return; }
+
+    // Open popup synchronously while user activation is still valid, then navigate after /x/oauth/start.
+    const popup = window.open('about:blank', 'kvpose-x-oauth', 'popup,width=520,height=720');
+    if(!popup){
+      setXStatus(t('settingsXOAuthPopupBlocked'));
+      return;
+    }
+    xOAuthPopup = popup;
     setXStatus(t('settingsXOAuthOpened'));
     try{
-      const origin = (location.origin && location.origin !== 'null') ? location.origin : '';
-      const qs = origin ? ('?frontend_origin=' + encodeURIComponent(origin)) : '';
+      const qs = '?frontend_origin=' + encodeURIComponent(origin);
       const resp = await fetch(backendUrl + '/x/oauth/start' + qs, {headers: backendAuthHeaders()});
       const body = await resp.json();
       const data = body && body.data ? body.data : body;
       if(!resp.ok || !data || !data.authorize_url){
+        try{ popup.close(); }catch(_){}
         setXStatus(t('settingsXOAuthNeedBackend'));
         return;
       }
       settingsXAuthMode.value = 'oauth';
-      xOAuthPopup = window.open(data.authorize_url, 'kvpose-x-oauth', 'popup,width=520,height=720');
+      popup.location = data.authorize_url;
     }catch(_){
+      try{ popup.close(); }catch(_){}
       setXStatus(t('settingsXOAuthNeedBackend'));
     }
   });
@@ -2066,7 +2122,7 @@ $('#mimg').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.change
       xAccessToken: settingsXAccessToken.value.trim(),
       xRefreshToken: tryonSettings.xRefreshToken || '',
       xUsername: tryonSettings.xUsername || '',
-      xDefaultText: (settingsXDefaultText.value || 'AI try-on result').trim().slice(0, 260),
+      xDefaultText: truncateXWeighted((settingsXDefaultText.value || 'AI try-on result').trim(), X_MAX_WEIGHTED),
     };
     if(!persistTryonSettings(tryonSettings)){ setSettingsMessage(t('aiFailed')); return; }
     refreshConfigUI();

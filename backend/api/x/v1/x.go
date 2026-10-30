@@ -43,8 +43,8 @@ type VerifyRes struct {
 // OAuthStartReq 启动 OAuth 2.0 PKCE 授权
 type OAuthStartReq struct {
 	g.Meta `path:"/x/oauth/start" method:"get" tags:"X" summary:"启动 X OAuth 2.0 PKCE"`
-	// 可选：前端 origin，用于回调页 postMessage 目标校验
-	FrontendOrigin string `json:"frontend_origin" in:"query" dc:"前端页面 Origin（用于回调 postMessage）"`
+	// 必填：前端 origin，须落在服务端白名单（security.trustedOrigins / x.oauth.trustedFrontendOrigins）或本机回环
+	FrontendOrigin string `json:"frontend_origin" in:"query" v:"required" dc:"前端页面 Origin（白名单精确匹配或本机回环，用于回调 postMessage）"`
 }
 
 // OAuthStartRes 返回授权 URL（前端打开或跳转）
