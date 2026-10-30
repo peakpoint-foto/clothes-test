@@ -139,10 +139,10 @@ X 用于把试穿结果图发到用户账号，不是生图协议。浏览器设
 |---|---|
 | `POST /x/verify` | 校验 `x_config.access_token` |
 | `POST /x/post` | 上传媒体并发帖（`image` + `text` + `x_config`） |
-| `GET /x/oauth/start` | 启动 PKCE（需配置 `X_CLIENT_ID` / `X_REDIRECT_URI`） |
-| `GET /x/oauth/callback` | OAuth 回调换码，经页面 `postMessage` 回传前端 |
+| `GET /x/oauth/start` | 启动 PKCE（需配置 `X_CLIENT_ID` / `X_REDIRECT_URI`；`frontend_origin` 须为本机回环或落在 `security.trustedOrigins` / `x.oauth.trustedFrontendOrigins`） |
+| `GET /x/oauth/callback` | OAuth 回调换码，仅向白名单 Origin `postMessage` Token（禁止 `*` / 任意 HTTPS） |
 
-服务端模板见 `manifest/config/config.example.yaml` 的 `x:` 段与 `.env.example`。
+帖文正文按 X 加权字数截断（CJK 计 2，上限 280）。服务端模板见 `manifest/config/config.example.yaml` 的 `x:` 段与 `.env.example`。
 
 响应：
 
