@@ -131,6 +131,19 @@ cp manifest/config/config.example.yaml manifest/config/config.yaml
 
 `client_config.provider` 支持 `openai`、`doubao`、`gemini`。个人 Base URL 必须是 HTTP/HTTPS 公网地址，且不能包含账号、查询参数或片段；localhost、内网和保留地址会被拒绝，以降低 SSRF 风险。ComfyUI 不接受 `client_config`，只使用后端本机配置。
 
+### X 分享（非生图）
+
+X 用于把试穿结果图发到用户账号，不是生图协议。浏览器设置中心支持 **Bearer / API Key** 与 **OAuth 2.0 PKCE**；用户 Token 仅保存在浏览器，发帖时随请求进入后端内存。
+
+| 接口 | 说明 |
+|---|---|
+| `POST /x/verify` | 校验 `x_config.access_token` |
+| `POST /x/post` | 上传媒体并发帖（`image` + `text` + `x_config`） |
+| `GET /x/oauth/start` | 启动 PKCE（需配置 `X_CLIENT_ID` / `X_REDIRECT_URI`） |
+| `GET /x/oauth/callback` | OAuth 回调换码，经页面 `postMessage` 回传前端 |
+
+服务端模板见 `manifest/config/config.example.yaml` 的 `x:` 段与 `.env.example`。
+
 响应：
 
 ```json

@@ -23,7 +23,7 @@ func (m *AuthMiddleware) Handler(r *ghttp.Request) {
 		r.Middleware.Next()
 		return
 	}
-	if r.URL.Path != "/tryon" {
+	if r.URL.Path != "/tryon" && r.URL.Path != "/x/post" && r.URL.Path != "/x/verify" {
 		r.Middleware.Next()
 		return
 	}
