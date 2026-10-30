@@ -1,0 +1,17 @@
+{
+  // kvPose / clothes-test — Vietnamese SPA on Workers Static Assets.
+  // The GoFrame try-on backend cannot run on Cloudflare Workers; host it separately
+  // and point the UI Settings → Backend API URL at that origin (HTTPS required).
+  "name": "kvpose",
+  "compatibility_date": "2026-10-30",
+  "workers_dev": true,
+  "preview_urls": true,
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "single-page-application",
+    "html_handling": "auto-trailing-slash"
+  }
+}
