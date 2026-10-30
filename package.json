@@ -1,0 +1,13 @@
+{
+  "name": "kvpose",
+  "private": true,
+  "description": "kvPose Vietnamese SPA — Cloudflare Workers Static Assets",
+  "scripts": {
+    "prepare:public": "bash scripts/prepare-public.sh",
+    "deploy": "npm run prepare:public && wrangler deploy",
+    "dev": "npm run prepare:public && wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "^4.156.0"
+  }
+}
